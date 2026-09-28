@@ -1,0 +1,4861 @@
+{
+  "$schema": "https://raw.githubusercontent.com/dineug/erd-editor/main/json-schema/schema.json",
+  "version": "3.0.0",
+  "settings": {
+    "width": 2900,
+    "height": 5400,
+    "scrollTop": 0,
+    "scrollLeft": 0,
+    "originX": 0,
+    "originY": 0,
+    "zoomLevel": 1,
+    "show": 431,
+    "database": 4,
+    "databaseName": "Ecommerce (MongoDB conceptual model)",
+    "canvasType": "ERD",
+    "language": 1,
+    "tableNameCase": 1,
+    "columnNameCase": 1,
+    "bracketType": 1,
+    "relationshipDataTypeSync": true,
+    "relationshipOptimization": false,
+    "columnOrder": [
+      1,
+      2,
+      4,
+      8,
+      16,
+      32,
+      64
+    ],
+    "maxWidthComment": -1,
+    "ignoreSaveSettings": 0
+  },
+  "doc": {
+    "tableIds": [
+      "organizations",
+      "users",
+      "organization_role",
+      "wholesale_buyer_profiles",
+      "products",
+      "product_variants",
+      "carts",
+      "orders",
+      "payment_transactions",
+      "shipments",
+      "shipment_events"
+    ],
+    "relationshipIds": [
+      "organizations_to_organization_role",
+      "users_to_organization_role",
+      "organizations_to_wholesale_buyer_profiles",
+      "users_to_wholesale_buyer_profiles",
+      "organizations_to_products",
+      "organizations_to_product_variants",
+      "products_to_product_variants",
+      "organizations_to_carts",
+      "users_to_carts",
+      "organizations_to_orders",
+      "users_to_orders",
+      "orders_to_payment_transactions",
+      "organizations_to_payment_transactions",
+      "organizations_to_shipments",
+      "orders_to_shipments",
+      "users_to_shipments",
+      "shipments_to_shipment_events",
+      "organizations_to_shipment_events",
+      "users_to_shipment_events"
+    ],
+    "indexIds": [
+      "organization_role.unique_organization_user_role",
+      "organization_role.user_organizations",
+      "wholesale_buyer_profiles.unique_organization_buyer",
+      "wholesale_buyer_profiles.buyer_organizations",
+      "products.organization_status",
+      "product_variants.organization_product",
+      "carts.unique_shop_user_mode",
+      "orders.unique_shop_order_number",
+      "orders.buyer_history",
+      "orders.shop_history",
+      "payment_transactions.unique_shop_provider_event",
+      "payment_transactions.order_history",
+      "payment_transactions.provider_payment_lookup",
+      "shipments.order_shipments",
+      "shipments.manager_queue",
+      "shipments.provider_tracking_lookup",
+      "shipment_events.unique_shipment_event",
+      "shipment_events.shipment_timeline"
+    ],
+    "memoIds": []
+  },
+  "collections": {
+    "tableEntities": {
+      "organizations": {
+        "id": "organizations",
+        "name": "organizations",
+        "comment": "Seller shops",
+        "columnIds": [
+          "organizations._id",
+          "organizations.name",
+          "organizations.slug",
+          "organizations.logo_url",
+          "organizations.address",
+          "organizations.contact_email",
+          "organizations.contact_phone",
+          "organizations.payment_integrations",
+          "organizations.shipping_integrations",
+          "organizations.status",
+          "organizations.created_at",
+          "organizations.updated_at"
+        ],
+        "seqColumnIds": [
+          "organizations._id",
+          "organizations.name",
+          "organizations.slug",
+          "organizations.logo_url",
+          "organizations.address",
+          "organizations.contact_email",
+          "organizations.contact_phone",
+          "organizations.payment_integrations",
+          "organizations.shipping_integrations",
+          "organizations.status",
+          "organizations.created_at",
+          "organizations.updated_at"
+        ],
+        "ui": {
+          "x": 120,
+          "y": 180,
+          "zIndex": 1,
+          "widthName": 117,
+          "widthComment": 150,
+          "color": "#ffffff"
+        },
+        "meta": {
+          "updateAt": 0,
+          "createAt": 0
+        }
+      },
+      "users": {
+        "id": "users",
+        "name": "users",
+        "comment": "Global login and profile details",
+        "columnIds": [
+          "users._id",
+          "users.name",
+          "users.email",
+          "users.password_hash",
+          "users.phone_number",
+          "users.is_email_verified",
+          "users.is_phone_verified",
+          "users.account_status",
+          "users.platform_role",
+          "users.created_at",
+          "users.updated_at"
+        ],
+        "seqColumnIds": [
+          "users._id",
+          "users.name",
+          "users.email",
+          "users.password_hash",
+          "users.phone_number",
+          "users.is_email_verified",
+          "users.is_phone_verified",
+          "users.account_status",
+          "users.platform_role",
+          "users.created_at",
+          "users.updated_at"
+        ],
+        "ui": {
+          "x": 1110,
+          "y": 180,
+          "zIndex": 2,
+          "widthName": 115,
+          "widthComment": 224,
+          "color": "#ffffff"
+        },
+        "meta": {
+          "updateAt": 0,
+          "createAt": 0
+        }
+      },
+      "organization_role": {
+        "id": "organization_role",
+        "name": "organization_role",
+        "comment": "One role assignment for one user in one shop",
+        "columnIds": [
+          "organization_role._id",
+          "organization_role.organization_id",
+          "organization_role.user_id",
+          "organization_role.role",
+          "organization_role.status",
+          "organization_role.created_at",
+          "organization_role.updated_at"
+        ],
+        "seqColumnIds": [
+          "organization_role._id",
+          "organization_role.organization_id",
+          "organization_role.user_id",
+          "organization_role.role",
+          "organization_role.status",
+          "organization_role.created_at",
+          "organization_role.updated_at"
+        ],
+        "ui": {
+          "x": 640,
+          "y": 970,
+          "zIndex": 3,
+          "widthName": 153,
+          "widthComment": 308,
+          "color": "#ffffff"
+        },
+        "meta": {
+          "updateAt": 0,
+          "createAt": 0
+        }
+      },
+      "wholesale_buyer_profiles": {
+        "id": "wholesale_buyer_profiles",
+        "name": "wholesale_buyer_profiles",
+        "comment": "One buyer's business details and approval for one shop",
+        "columnIds": [
+          "wholesale_buyer_profiles._id",
+          "wholesale_buyer_profiles.organization_id",
+          "wholesale_buyer_profiles.user_id",
+          "wholesale_buyer_profiles.company_name",
+          "wholesale_buyer_profiles.company_address",
+          "wholesale_buyer_profiles.business_type",
+          "wholesale_buyer_profiles.pan_number",
+          "wholesale_buyer_profiles.gstin",
+          "wholesale_buyer_profiles.aadhaar_last4",
+          "wholesale_buyer_profiles.verification_documents",
+          "wholesale_buyer_profiles.approval_status",
+          "wholesale_buyer_profiles.reviewed_at",
+          "wholesale_buyer_profiles.created_at",
+          "wholesale_buyer_profiles.updated_at"
+        ],
+        "seqColumnIds": [
+          "wholesale_buyer_profiles._id",
+          "wholesale_buyer_profiles.organization_id",
+          "wholesale_buyer_profiles.user_id",
+          "wholesale_buyer_profiles.company_name",
+          "wholesale_buyer_profiles.company_address",
+          "wholesale_buyer_profiles.business_type",
+          "wholesale_buyer_profiles.pan_number",
+          "wholesale_buyer_profiles.gstin",
+          "wholesale_buyer_profiles.aadhaar_last4",
+          "wholesale_buyer_profiles.verification_documents",
+          "wholesale_buyer_profiles.approval_status",
+          "wholesale_buyer_profiles.reviewed_at",
+          "wholesale_buyer_profiles.created_at",
+          "wholesale_buyer_profiles.updated_at"
+        ],
+        "ui": {
+          "x": 1230,
+          "y": 1110,
+          "zIndex": 4,
+          "widthName": 190,
+          "widthComment": 360,
+          "color": "#ffffff"
+        },
+        "meta": {
+          "updateAt": 0,
+          "createAt": 0
+        }
+      },
+      "products": {
+        "id": "products",
+        "name": "products",
+        "comment": "Products owned by one seller shop; variants inherit visibility",
+        "columnIds": [
+          "products._id",
+          "products.organization_id",
+          "products.title",
+          "products.description",
+          "products.currency",
+          "products.images",
+          "products.visibility",
+          "products.status",
+          "products.created_at",
+          "products.updated_at"
+        ],
+        "seqColumnIds": [
+          "products._id",
+          "products.organization_id",
+          "products.title",
+          "products.description",
+          "products.currency",
+          "products.images",
+          "products.visibility",
+          "products.status",
+          "products.created_at",
+          "products.updated_at"
+        ],
+        "ui": {
+          "x": 130,
+          "y": 1810,
+          "zIndex": 5,
+          "widthName": 120,
+          "widthComment": 385,
+          "color": "#ffffff"
+        },
+        "meta": {
+          "updateAt": 0,
+          "createAt": 0
+        }
+      },
+      "product_variants": {
+        "id": "product_variants",
+        "name": "product_variants",
+        "comment": "One sellable option combination; visibility may narrow product visibility",
+        "columnIds": [
+          "product_variants._id",
+          "product_variants.organization_id",
+          "product_variants.product_id",
+          "product_variants.option_values",
+          "product_variants.sku",
+          "product_variants.visibility_override",
+          "product_variants.price",
+          "product_variants.compare_at_price",
+          "product_variants.stock_quantity",
+          "product_variants.images",
+          "product_variants.position",
+          "product_variants.created_at",
+          "product_variants.updated_at"
+        ],
+        "seqColumnIds": [
+          "product_variants._id",
+          "product_variants.organization_id",
+          "product_variants.product_id",
+          "product_variants.option_values",
+          "product_variants.sku",
+          "product_variants.visibility_override",
+          "product_variants.price",
+          "product_variants.compare_at_price",
+          "product_variants.stock_quantity",
+          "product_variants.images",
+          "product_variants.position",
+          "product_variants.created_at",
+          "product_variants.updated_at"
+        ],
+        "ui": {
+          "x": 1180,
+          "y": 1810,
+          "zIndex": 6,
+          "widthName": 144,
+          "widthComment": 462,
+          "color": "#ffffff"
+        },
+        "meta": {
+          "updateAt": 0,
+          "createAt": 0
+        }
+      },
+      "carts": {
+        "id": "carts",
+        "name": "carts",
+        "comment": "Current cart for one signed-in buyer in one shop and buying mode",
+        "columnIds": [
+          "carts._id",
+          "carts.organization_id",
+          "carts.user_id",
+          "carts.shopping_as",
+          "carts.items",
+          "carts.created_at",
+          "carts.updated_at"
+        ],
+        "seqColumnIds": [
+          "carts._id",
+          "carts.organization_id",
+          "carts.user_id",
+          "carts.shopping_as",
+          "carts.items",
+          "carts.created_at",
+          "carts.updated_at"
+        ],
+        "ui": {
+          "x": 520,
+          "y": 2500,
+          "zIndex": 7,
+          "widthName": 120,
+          "widthComment": 410,
+          "color": "#ffffff"
+        },
+        "meta": {
+          "updateAt": 0,
+          "createAt": 0
+        }
+      },
+      "orders": {
+        "id": "orders",
+        "name": "orders",
+        "comment": "Purchase history and order summary for one shop and buyer",
+        "columnIds": [
+          "orders._id",
+          "orders.organization_id",
+          "orders.user_id",
+          "orders.order_number",
+          "orders.shopping_as",
+          "orders.buyer_snapshot",
+          "orders.line_items",
+          "orders.currency",
+          "orders.subtotal_amount",
+          "orders.discount_amount",
+          "orders.shipping_amount",
+          "orders.tax_amount",
+          "orders.total_amount",
+          "orders.shipping_address",
+          "orders.billing_address",
+          "orders.order_status",
+          "orders.payment_status",
+          "orders.fulfillment_status",
+          "orders.payment_reference",
+          "orders.placed_at",
+          "orders.updated_at"
+        ],
+        "seqColumnIds": [
+          "orders._id",
+          "orders.organization_id",
+          "orders.user_id",
+          "orders.order_number",
+          "orders.shopping_as",
+          "orders.buyer_snapshot",
+          "orders.line_items",
+          "orders.currency",
+          "orders.subtotal_amount",
+          "orders.discount_amount",
+          "orders.shipping_amount",
+          "orders.tax_amount",
+          "orders.total_amount",
+          "orders.shipping_address",
+          "orders.billing_address",
+          "orders.order_status",
+          "orders.payment_status",
+          "orders.fulfillment_status",
+          "orders.payment_reference",
+          "orders.placed_at",
+          "orders.updated_at"
+        ],
+        "ui": {
+          "x": 650,
+          "y": 3200,
+          "zIndex": 8,
+          "widthName": 120,
+          "widthComment": 410,
+          "color": "#ffffff"
+        },
+        "meta": {
+          "updateAt": 0,
+          "createAt": 0
+        }
+      },
+      "payment_transactions": {
+        "id": "payment_transactions",
+        "name": "payment_transactions",
+        "comment": "Payment attempts, captures, refunds, and provider events for an order",
+        "columnIds": [
+          "payment_transactions._id",
+          "payment_transactions.organization_id",
+          "payment_transactions.order_id",
+          "payment_transactions.provider",
+          "payment_transactions.event_key",
+          "payment_transactions.transaction_type",
+          "payment_transactions.status",
+          "payment_transactions.amount",
+          "payment_transactions.currency",
+          "payment_transactions.payment_method",
+          "payment_transactions.provider_order_id",
+          "payment_transactions.provider_payment_id",
+          "payment_transactions.provider_refund_id",
+          "payment_transactions.provider_event_id",
+          "payment_transactions.provider_details",
+          "payment_transactions.failure_code",
+          "payment_transactions.occurred_at",
+          "payment_transactions.created_at"
+        ],
+        "seqColumnIds": [
+          "payment_transactions._id",
+          "payment_transactions.organization_id",
+          "payment_transactions.order_id",
+          "payment_transactions.provider",
+          "payment_transactions.event_key",
+          "payment_transactions.transaction_type",
+          "payment_transactions.status",
+          "payment_transactions.amount",
+          "payment_transactions.currency",
+          "payment_transactions.payment_method",
+          "payment_transactions.provider_order_id",
+          "payment_transactions.provider_payment_id",
+          "payment_transactions.provider_refund_id",
+          "payment_transactions.provider_event_id",
+          "payment_transactions.provider_details",
+          "payment_transactions.failure_code",
+          "payment_transactions.occurred_at",
+          "payment_transactions.created_at"
+        ],
+        "ui": {
+          "x": 1660,
+          "y": 3200,
+          "zIndex": 9,
+          "widthName": 190,
+          "widthComment": 430,
+          "color": "#ffffff"
+        },
+        "meta": {
+          "updateAt": 0,
+          "createAt": 0
+        }
+      },
+      "shipments": {
+        "id": "shipments",
+        "name": "shipments",
+        "comment": "Packages or deliveries for an order; one order can have multiple shipments",
+        "columnIds": [
+          "shipments._id",
+          "shipments.organization_id",
+          "shipments.order_id",
+          "shipments.items",
+          "shipments.ship_to_address",
+          "shipments.managed_by_type",
+          "shipments.managed_by_user_id",
+          "shipments.shipping_provider",
+          "shipments.provider_shipment_id",
+          "shipments.service_level",
+          "shipments.tracking_number",
+          "shipments.tracking_url",
+          "shipments.label_file_ref",
+          "shipments.provider_details",
+          "shipments.status",
+          "shipments.estimated_delivery_at",
+          "shipments.shipped_at",
+          "shipments.delivered_at",
+          "shipments.created_at",
+          "shipments.updated_at"
+        ],
+        "seqColumnIds": [
+          "shipments._id",
+          "shipments.organization_id",
+          "shipments.order_id",
+          "shipments.items",
+          "shipments.ship_to_address",
+          "shipments.managed_by_type",
+          "shipments.managed_by_user_id",
+          "shipments.shipping_provider",
+          "shipments.provider_shipment_id",
+          "shipments.service_level",
+          "shipments.tracking_number",
+          "shipments.tracking_url",
+          "shipments.label_file_ref",
+          "shipments.provider_details",
+          "shipments.status",
+          "shipments.estimated_delivery_at",
+          "shipments.shipped_at",
+          "shipments.delivered_at",
+          "shipments.created_at",
+          "shipments.updated_at"
+        ],
+        "ui": {
+          "x": 650,
+          "y": 4250,
+          "zIndex": 10,
+          "widthName": 180,
+          "widthComment": 440,
+          "color": "#ffffff"
+        },
+        "meta": {
+          "updateAt": 0,
+          "createAt": 0
+        }
+      },
+      "shipment_events": {
+        "id": "shipment_events",
+        "name": "shipment_events",
+        "comment": "Append-only tracking and fulfillment steps for a shipment",
+        "columnIds": [
+          "shipment_events._id",
+          "shipment_events.organization_id",
+          "shipment_events.shipment_id",
+          "shipment_events.event_key",
+          "shipment_events.status",
+          "shipment_events.message",
+          "shipment_events.location",
+          "shipment_events.source",
+          "shipment_events.recorded_by_user_id",
+          "shipment_events.provider_event_id",
+          "shipment_events.occurred_at",
+          "shipment_events.created_at"
+        ],
+        "seqColumnIds": [
+          "shipment_events._id",
+          "shipment_events.organization_id",
+          "shipment_events.shipment_id",
+          "shipment_events.event_key",
+          "shipment_events.status",
+          "shipment_events.message",
+          "shipment_events.location",
+          "shipment_events.source",
+          "shipment_events.recorded_by_user_id",
+          "shipment_events.provider_event_id",
+          "shipment_events.occurred_at",
+          "shipment_events.created_at"
+        ],
+        "ui": {
+          "x": 1660,
+          "y": 4250,
+          "zIndex": 11,
+          "widthName": 190,
+          "widthComment": 470,
+          "color": "#ffffff"
+        },
+        "meta": {
+          "updateAt": 0,
+          "createAt": 0
+        }
+      }
+    },
+    "tableColumnEntities": {
+      "organizations._id": {
+        "id": "organizations._id",
+        "tableId": "organizations",
+        "name": "_id",
+        "comment": "MongoDB organization ID",
+        "dataType": "ObjectId",
+        "default": "",
+        "options": 10,
+        "ui": {
+          "keys": 1,
+          "widthName": 85,
+          "widthComment": 161,
+          "widthDataType": 75,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 0,
+          "createAt": 0
+        }
+      },
+      "organizations.name": {
+        "id": "organizations.name",
+        "tableId": "organizations",
+        "name": "name",
+        "comment": "Public shop or organization name",
+        "dataType": "String",
+        "default": "",
+        "options": 8,
+        "ui": {
+          "keys": 0,
+          "widthName": 85,
+          "widthComment": 224,
+          "widthDataType": 75,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 0,
+          "createAt": 0
+        }
+      },
+      "organizations.slug": {
+        "id": "organizations.slug",
+        "tableId": "organizations",
+        "name": "slug",
+        "comment": "Unique shop URL name",
+        "dataType": "String",
+        "default": "",
+        "options": 12,
+        "ui": {
+          "keys": 0,
+          "widthName": 85,
+          "widthComment": 140,
+          "widthDataType": 75,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 0,
+          "createAt": 0
+        }
+      },
+      "organizations.logo_url": {
+        "id": "organizations.logo_url",
+        "tableId": "organizations",
+        "name": "logo_url",
+        "comment": "Reference to the stored logo image",
+        "dataType": "String",
+        "default": "",
+        "options": 0,
+        "ui": {
+          "keys": 0,
+          "widthName": 85,
+          "widthComment": 238,
+          "widthDataType": 75,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 0,
+          "createAt": 0
+        }
+      },
+      "organizations.address": {
+        "id": "organizations.address",
+        "tableId": "organizations",
+        "name": "address",
+        "comment": "line1, line2, city, state, postal_code, country",
+        "dataType": "Document",
+        "default": "",
+        "options": 0,
+        "ui": {
+          "keys": 0,
+          "widthName": 85,
+          "widthComment": 329,
+          "widthDataType": 75,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 0,
+          "createAt": 0
+        }
+      },
+      "organizations.contact_email": {
+        "id": "organizations.contact_email",
+        "tableId": "organizations",
+        "name": "contact_email",
+        "comment": "",
+        "dataType": "String",
+        "default": "",
+        "options": 0,
+        "ui": {
+          "keys": 0,
+          "widthName": 104,
+          "widthComment": 60,
+          "widthDataType": 75,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 0,
+          "createAt": 0
+        }
+      },
+      "organizations.contact_phone": {
+        "id": "organizations.contact_phone",
+        "tableId": "organizations",
+        "name": "contact_phone",
+        "comment": "",
+        "dataType": "String",
+        "default": "",
+        "options": 0,
+        "ui": {
+          "keys": 0,
+          "widthName": 104,
+          "widthComment": 60,
+          "widthDataType": 75,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 0,
+          "createAt": 0
+        }
+      },
+      "organizations.status": {
+        "id": "organizations.status",
+        "tableId": "organizations",
+        "name": "status",
+        "comment": "active or suspended",
+        "dataType": "String",
+        "default": "active",
+        "options": 8,
+        "ui": {
+          "keys": 0,
+          "widthName": 85,
+          "widthComment": 133,
+          "widthDataType": 75,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 0,
+          "createAt": 0
+        }
+      },
+      "organizations.created_at": {
+        "id": "organizations.created_at",
+        "tableId": "organizations",
+        "name": "created_at",
+        "comment": "",
+        "dataType": "Date",
+        "default": "",
+        "options": 8,
+        "ui": {
+          "keys": 0,
+          "widthName": 85,
+          "widthComment": 60,
+          "widthDataType": 75,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 0,
+          "createAt": 0
+        }
+      },
+      "organizations.updated_at": {
+        "id": "organizations.updated_at",
+        "tableId": "organizations",
+        "name": "updated_at",
+        "comment": "",
+        "dataType": "Date",
+        "default": "",
+        "options": 8,
+        "ui": {
+          "keys": 0,
+          "widthName": 85,
+          "widthComment": 60,
+          "widthDataType": 75,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 0,
+          "createAt": 0
+        }
+      },
+      "users._id": {
+        "id": "users._id",
+        "tableId": "users",
+        "name": "_id",
+        "comment": "MongoDB user ID",
+        "dataType": "ObjectId",
+        "default": "",
+        "options": 10,
+        "ui": {
+          "keys": 1,
+          "widthName": 85,
+          "widthComment": 105,
+          "widthDataType": 75,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 0,
+          "createAt": 0
+        }
+      },
+      "users.name": {
+        "id": "users.name",
+        "tableId": "users",
+        "name": "name",
+        "comment": "",
+        "dataType": "String",
+        "default": "",
+        "options": 8,
+        "ui": {
+          "keys": 0,
+          "widthName": 85,
+          "widthComment": 60,
+          "widthDataType": 75,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 0,
+          "createAt": 0
+        }
+      },
+      "users.email": {
+        "id": "users.email",
+        "tableId": "users",
+        "name": "email",
+        "comment": "Unique login email",
+        "dataType": "String",
+        "default": "",
+        "options": 12,
+        "ui": {
+          "keys": 0,
+          "widthName": 85,
+          "widthComment": 126,
+          "widthDataType": 75,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 0,
+          "createAt": 0
+        }
+      },
+      "users.password_hash": {
+        "id": "users.password_hash",
+        "tableId": "users",
+        "name": "password_hash",
+        "comment": "Hashed password",
+        "dataType": "String",
+        "default": "",
+        "options": 8,
+        "ui": {
+          "keys": 0,
+          "widthName": 104,
+          "widthComment": 105,
+          "widthDataType": 75,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 0,
+          "createAt": 0
+        }
+      },
+      "users.phone_number": {
+        "id": "users.phone_number",
+        "tableId": "users",
+        "name": "phone_number",
+        "comment": "",
+        "dataType": "String",
+        "default": "",
+        "options": 0,
+        "ui": {
+          "keys": 0,
+          "widthName": 96,
+          "widthComment": 60,
+          "widthDataType": 75,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 0,
+          "createAt": 0
+        }
+      },
+      "users.is_email_verified": {
+        "id": "users.is_email_verified",
+        "tableId": "users",
+        "name": "is_email_verified",
+        "comment": "",
+        "dataType": "Boolean",
+        "default": "false",
+        "options": 8,
+        "ui": {
+          "keys": 0,
+          "widthName": 136,
+          "widthComment": 60,
+          "widthDataType": 75,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 0,
+          "createAt": 0
+        }
+      },
+      "users.is_phone_verified": {
+        "id": "users.is_phone_verified",
+        "tableId": "users",
+        "name": "is_phone_verified",
+        "comment": "",
+        "dataType": "Boolean",
+        "default": "false",
+        "options": 8,
+        "ui": {
+          "keys": 0,
+          "widthName": 136,
+          "widthComment": 60,
+          "widthDataType": 75,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 0,
+          "createAt": 0
+        }
+      },
+      "users.account_status": {
+        "id": "users.account_status",
+        "tableId": "users",
+        "name": "account_status",
+        "comment": "active, suspended, or inactive",
+        "dataType": "String",
+        "default": "active",
+        "options": 8,
+        "ui": {
+          "keys": 0,
+          "widthName": 112,
+          "widthComment": 210,
+          "widthDataType": 75,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 0,
+          "createAt": 0
+        }
+      },
+      "users.platform_role": {
+        "id": "users.platform_role",
+        "tableId": "users",
+        "name": "platform_role",
+        "comment": "user or superadmin; shop roles are separate",
+        "dataType": "String",
+        "default": "user",
+        "options": 8,
+        "ui": {
+          "keys": 0,
+          "widthName": 104,
+          "widthComment": 301,
+          "widthDataType": 75,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 0,
+          "createAt": 0
+        }
+      },
+      "users.created_at": {
+        "id": "users.created_at",
+        "tableId": "users",
+        "name": "created_at",
+        "comment": "",
+        "dataType": "Date",
+        "default": "",
+        "options": 8,
+        "ui": {
+          "keys": 0,
+          "widthName": 85,
+          "widthComment": 60,
+          "widthDataType": 75,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 0,
+          "createAt": 0
+        }
+      },
+      "users.updated_at": {
+        "id": "users.updated_at",
+        "tableId": "users",
+        "name": "updated_at",
+        "comment": "",
+        "dataType": "Date",
+        "default": "",
+        "options": 8,
+        "ui": {
+          "keys": 0,
+          "widthName": 85,
+          "widthComment": 60,
+          "widthDataType": 75,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 0,
+          "createAt": 0
+        }
+      },
+      "organization_role._id": {
+        "id": "organization_role._id",
+        "tableId": "organization_role",
+        "name": "_id",
+        "comment": "MongoDB role assignment ID",
+        "dataType": "ObjectId",
+        "default": "",
+        "options": 10,
+        "ui": {
+          "keys": 1,
+          "widthName": 85,
+          "widthComment": 182,
+          "widthDataType": 75,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 0,
+          "createAt": 0
+        }
+      },
+      "organization_role.organization_id": {
+        "id": "organization_role.organization_id",
+        "tableId": "organization_role",
+        "name": "organization_id",
+        "comment": "References organizations._id",
+        "dataType": "ObjectId",
+        "default": "",
+        "options": 8,
+        "ui": {
+          "keys": 2,
+          "widthName": 120,
+          "widthComment": 196,
+          "widthDataType": 75,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 0,
+          "createAt": 0
+        }
+      },
+      "organization_role.user_id": {
+        "id": "organization_role.user_id",
+        "tableId": "organization_role",
+        "name": "user_id",
+        "comment": "References users._id",
+        "dataType": "ObjectId",
+        "default": "",
+        "options": 8,
+        "ui": {
+          "keys": 2,
+          "widthName": 85,
+          "widthComment": 140,
+          "widthDataType": 75,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 0,
+          "createAt": 0
+        }
+      },
+      "organization_role.role": {
+        "id": "organization_role.role",
+        "tableId": "organization_role",
+        "name": "role",
+        "comment": "owner, admin, customer, or wholesale_buyer",
+        "dataType": "String",
+        "default": "",
+        "options": 8,
+        "ui": {
+          "keys": 0,
+          "widthName": 85,
+          "widthComment": 294,
+          "widthDataType": 75,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 0,
+          "createAt": 0
+        }
+      },
+      "organization_role.status": {
+        "id": "organization_role.status",
+        "tableId": "organization_role",
+        "name": "status",
+        "comment": "active, suspended, or inactive in this shop",
+        "dataType": "String",
+        "default": "active",
+        "options": 8,
+        "ui": {
+          "keys": 0,
+          "widthName": 85,
+          "widthComment": 301,
+          "widthDataType": 75,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 0,
+          "createAt": 0
+        }
+      },
+      "organization_role.created_at": {
+        "id": "organization_role.created_at",
+        "tableId": "organization_role",
+        "name": "created_at",
+        "comment": "",
+        "dataType": "Date",
+        "default": "",
+        "options": 8,
+        "ui": {
+          "keys": 0,
+          "widthName": 85,
+          "widthComment": 60,
+          "widthDataType": 75,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 0,
+          "createAt": 0
+        }
+      },
+      "organization_role.updated_at": {
+        "id": "organization_role.updated_at",
+        "tableId": "organization_role",
+        "name": "updated_at",
+        "comment": "",
+        "dataType": "Date",
+        "default": "",
+        "options": 8,
+        "ui": {
+          "keys": 0,
+          "widthName": 85,
+          "widthComment": 60,
+          "widthDataType": 75,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 0,
+          "createAt": 0
+        }
+      },
+      "organizations.payment_integrations": {
+        "id": "organizations.payment_integrations",
+        "tableId": "organizations",
+        "name": "payment_integrations",
+        "comment": "Each: provider, mode, key_id, key_secret_ref, webhook_secret_ref, enabled",
+        "dataType": "Array<Document>",
+        "default": "",
+        "options": 0,
+        "ui": {
+          "keys": 0,
+          "widthName": 160,
+          "widthComment": 511,
+          "widthDataType": 130,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 0,
+          "createAt": 0
+        }
+      },
+      "organizations.shipping_integrations": {
+        "id": "organizations.shipping_integrations",
+        "tableId": "organizations",
+        "name": "shipping_integrations",
+        "comment": "Each: provider, account_id, api_key_secret_ref, enabled",
+        "dataType": "Array<Document>",
+        "default": "",
+        "options": 0,
+        "ui": {
+          "keys": 0,
+          "widthName": 168,
+          "widthComment": 385,
+          "widthDataType": 130,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 0,
+          "createAt": 0
+        }
+      },
+      "wholesale_buyer_profiles._id": {
+        "id": "wholesale_buyer_profiles._id",
+        "tableId": "wholesale_buyer_profiles",
+        "name": "_id",
+        "comment": "MongoDB profile ID",
+        "dataType": "ObjectId",
+        "default": "",
+        "options": 10,
+        "ui": {
+          "keys": 1,
+          "widthName": 85,
+          "widthComment": 126,
+          "widthDataType": 75,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 0,
+          "createAt": 0
+        }
+      },
+      "wholesale_buyer_profiles.organization_id": {
+        "id": "wholesale_buyer_profiles.organization_id",
+        "tableId": "wholesale_buyer_profiles",
+        "name": "organization_id",
+        "comment": "Shop receiving these business details",
+        "dataType": "ObjectId",
+        "default": "",
+        "options": 8,
+        "ui": {
+          "keys": 2,
+          "widthName": 120,
+          "widthComment": 259,
+          "widthDataType": 75,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 0,
+          "createAt": 0
+        }
+      },
+      "wholesale_buyer_profiles.user_id": {
+        "id": "wholesale_buyer_profiles.user_id",
+        "tableId": "wholesale_buyer_profiles",
+        "name": "user_id",
+        "comment": "Wholesale buyer login",
+        "dataType": "ObjectId",
+        "default": "",
+        "options": 8,
+        "ui": {
+          "keys": 2,
+          "widthName": 85,
+          "widthComment": 147,
+          "widthDataType": 75,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 0,
+          "createAt": 0
+        }
+      },
+      "wholesale_buyer_profiles.company_name": {
+        "id": "wholesale_buyer_profiles.company_name",
+        "tableId": "wholesale_buyer_profiles",
+        "name": "company_name",
+        "comment": "",
+        "dataType": "String",
+        "default": "",
+        "options": 8,
+        "ui": {
+          "keys": 0,
+          "widthName": 96,
+          "widthComment": 60,
+          "widthDataType": 75,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 0,
+          "createAt": 0
+        }
+      },
+      "wholesale_buyer_profiles.company_address": {
+        "id": "wholesale_buyer_profiles.company_address",
+        "tableId": "wholesale_buyer_profiles",
+        "name": "company_address",
+        "comment": "line1, line2, city, state, postal_code, country",
+        "dataType": "Document",
+        "default": "",
+        "options": 8,
+        "ui": {
+          "keys": 0,
+          "widthName": 120,
+          "widthComment": 329,
+          "widthDataType": 75,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 0,
+          "createAt": 0
+        }
+      },
+      "wholesale_buyer_profiles.business_type": {
+        "id": "wholesale_buyer_profiles.business_type",
+        "tableId": "wholesale_buyer_profiles",
+        "name": "business_type",
+        "comment": "For example company or sole proprietor",
+        "dataType": "String",
+        "default": "",
+        "options": 0,
+        "ui": {
+          "keys": 0,
+          "widthName": 104,
+          "widthComment": 266,
+          "widthDataType": 75,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 0,
+          "createAt": 0
+        }
+      },
+      "wholesale_buyer_profiles.pan_number": {
+        "id": "wholesale_buyer_profiles.pan_number",
+        "tableId": "wholesale_buyer_profiles",
+        "name": "pan_number",
+        "comment": "Business or proprietor PAN; restricted access",
+        "dataType": "String",
+        "default": "",
+        "options": 0,
+        "ui": {
+          "keys": 0,
+          "widthName": 85,
+          "widthComment": 315,
+          "widthDataType": 75,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 0,
+          "createAt": 0
+        }
+      },
+      "wholesale_buyer_profiles.gstin": {
+        "id": "wholesale_buyer_profiles.gstin",
+        "tableId": "wholesale_buyer_profiles",
+        "name": "gstin",
+        "comment": "GST registration number, if applicable",
+        "dataType": "String",
+        "default": "",
+        "options": 0,
+        "ui": {
+          "keys": 0,
+          "widthName": 85,
+          "widthComment": 266,
+          "widthDataType": 75,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 0,
+          "createAt": 0
+        }
+      },
+      "wholesale_buyer_profiles.aadhaar_last4": {
+        "id": "wholesale_buyer_profiles.aadhaar_last4",
+        "tableId": "wholesale_buyer_profiles",
+        "name": "aadhaar_last4",
+        "comment": "Representative Aadhaar last four digits only",
+        "dataType": "String",
+        "default": "",
+        "options": 0,
+        "ui": {
+          "keys": 0,
+          "widthName": 104,
+          "widthComment": 308,
+          "widthDataType": 75,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 0,
+          "createAt": 0
+        }
+      },
+      "wholesale_buyer_profiles.verification_documents": {
+        "id": "wholesale_buyer_profiles.verification_documents",
+        "tableId": "wholesale_buyer_profiles",
+        "name": "verification_documents",
+        "comment": "Private file refs; Aadhaar copy masked if retained",
+        "dataType": "Array<Document>",
+        "default": "",
+        "options": 0,
+        "ui": {
+          "keys": 0,
+          "widthName": 176,
+          "widthComment": 350,
+          "widthDataType": 120,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 0,
+          "createAt": 0
+        }
+      },
+      "wholesale_buyer_profiles.approval_status": {
+        "id": "wholesale_buyer_profiles.approval_status",
+        "tableId": "wholesale_buyer_profiles",
+        "name": "approval_status",
+        "comment": "pending, approved, or rejected by this shop",
+        "dataType": "String",
+        "default": "pending",
+        "options": 8,
+        "ui": {
+          "keys": 0,
+          "widthName": 120,
+          "widthComment": 301,
+          "widthDataType": 75,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 0,
+          "createAt": 0
+        }
+      },
+      "wholesale_buyer_profiles.reviewed_at": {
+        "id": "wholesale_buyer_profiles.reviewed_at",
+        "tableId": "wholesale_buyer_profiles",
+        "name": "reviewed_at",
+        "comment": "",
+        "dataType": "Date",
+        "default": "",
+        "options": 0,
+        "ui": {
+          "keys": 0,
+          "widthName": 88,
+          "widthComment": 60,
+          "widthDataType": 75,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 0,
+          "createAt": 0
+        }
+      },
+      "wholesale_buyer_profiles.created_at": {
+        "id": "wholesale_buyer_profiles.created_at",
+        "tableId": "wholesale_buyer_profiles",
+        "name": "created_at",
+        "comment": "",
+        "dataType": "Date",
+        "default": "",
+        "options": 8,
+        "ui": {
+          "keys": 0,
+          "widthName": 85,
+          "widthComment": 60,
+          "widthDataType": 75,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 0,
+          "createAt": 0
+        }
+      },
+      "wholesale_buyer_profiles.updated_at": {
+        "id": "wholesale_buyer_profiles.updated_at",
+        "tableId": "wholesale_buyer_profiles",
+        "name": "updated_at",
+        "comment": "",
+        "dataType": "Date",
+        "default": "",
+        "options": 8,
+        "ui": {
+          "keys": 0,
+          "widthName": 85,
+          "widthComment": 60,
+          "widthDataType": 75,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 0,
+          "createAt": 0
+        }
+      },
+      "products._id": {
+        "id": "products._id",
+        "tableId": "products",
+        "name": "_id",
+        "comment": "MongoDB product ID",
+        "dataType": "ObjectId",
+        "default": "",
+        "options": 10,
+        "ui": {
+          "keys": 1,
+          "widthName": 85,
+          "widthComment": 126,
+          "widthDataType": 75,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 0,
+          "createAt": 0
+        }
+      },
+      "products.organization_id": {
+        "id": "products.organization_id",
+        "tableId": "products",
+        "name": "organization_id",
+        "comment": "Seller shop",
+        "dataType": "ObjectId",
+        "default": "",
+        "options": 8,
+        "ui": {
+          "keys": 2,
+          "widthName": 120,
+          "widthComment": 77,
+          "widthDataType": 75,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 0,
+          "createAt": 0
+        }
+      },
+      "products.title": {
+        "id": "products.title",
+        "tableId": "products",
+        "name": "title",
+        "comment": "",
+        "dataType": "String",
+        "default": "",
+        "options": 8,
+        "ui": {
+          "keys": 0,
+          "widthName": 85,
+          "widthComment": 60,
+          "widthDataType": 75,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 0,
+          "createAt": 0
+        }
+      },
+      "products.description": {
+        "id": "products.description",
+        "tableId": "products",
+        "name": "description",
+        "comment": "",
+        "dataType": "String",
+        "default": "",
+        "options": 0,
+        "ui": {
+          "keys": 0,
+          "widthName": 88,
+          "widthComment": 60,
+          "widthDataType": 75,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 0,
+          "createAt": 0
+        }
+      },
+      "products.currency": {
+        "id": "products.currency",
+        "tableId": "products",
+        "name": "currency",
+        "comment": "Currency code, for example INR",
+        "dataType": "String",
+        "default": "",
+        "options": 8,
+        "ui": {
+          "keys": 0,
+          "widthName": 85,
+          "widthComment": 210,
+          "widthDataType": 75,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 0,
+          "createAt": 0
+        }
+      },
+      "products.images": {
+        "id": "products.images",
+        "tableId": "products",
+        "name": "images",
+        "comment": "Each: url, alt_text, sort_order",
+        "dataType": "Array<Document>",
+        "default": "",
+        "options": 0,
+        "ui": {
+          "keys": 0,
+          "widthName": 85,
+          "widthComment": 217,
+          "widthDataType": 120,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 0,
+          "createAt": 0
+        }
+      },
+      "products.status": {
+        "id": "products.status",
+        "tableId": "products",
+        "name": "status",
+        "comment": "draft, active, or archived",
+        "dataType": "String",
+        "default": "draft",
+        "options": 8,
+        "ui": {
+          "keys": 0,
+          "widthName": 85,
+          "widthComment": 182,
+          "widthDataType": 75,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 0,
+          "createAt": 0
+        }
+      },
+      "products.created_at": {
+        "id": "products.created_at",
+        "tableId": "products",
+        "name": "created_at",
+        "comment": "",
+        "dataType": "Date",
+        "default": "",
+        "options": 8,
+        "ui": {
+          "keys": 0,
+          "widthName": 85,
+          "widthComment": 60,
+          "widthDataType": 75,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 0,
+          "createAt": 0
+        }
+      },
+      "products.updated_at": {
+        "id": "products.updated_at",
+        "tableId": "products",
+        "name": "updated_at",
+        "comment": "",
+        "dataType": "Date",
+        "default": "",
+        "options": 8,
+        "ui": {
+          "keys": 0,
+          "widthName": 85,
+          "widthComment": 60,
+          "widthDataType": 75,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 0,
+          "createAt": 0
+        }
+      },
+      "product_variants._id": {
+        "id": "product_variants._id",
+        "tableId": "product_variants",
+        "name": "_id",
+        "comment": "MongoDB variant ID",
+        "dataType": "ObjectId",
+        "default": "",
+        "options": 10,
+        "ui": {
+          "keys": 1,
+          "widthName": 85,
+          "widthComment": 126,
+          "widthDataType": 75,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 0,
+          "createAt": 0
+        }
+      },
+      "product_variants.organization_id": {
+        "id": "product_variants.organization_id",
+        "tableId": "product_variants",
+        "name": "organization_id",
+        "comment": "Same seller shop as product",
+        "dataType": "ObjectId",
+        "default": "",
+        "options": 8,
+        "ui": {
+          "keys": 2,
+          "widthName": 120,
+          "widthComment": 189,
+          "widthDataType": 75,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 0,
+          "createAt": 0
+        }
+      },
+      "product_variants.product_id": {
+        "id": "product_variants.product_id",
+        "tableId": "product_variants",
+        "name": "product_id",
+        "comment": "References products._id",
+        "dataType": "ObjectId",
+        "default": "",
+        "options": 8,
+        "ui": {
+          "keys": 2,
+          "widthName": 85,
+          "widthComment": 161,
+          "widthDataType": 75,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 0,
+          "createAt": 0
+        }
+      },
+      "product_variants.option_values": {
+        "id": "product_variants.option_values",
+        "tableId": "product_variants",
+        "name": "option_values",
+        "comment": "For example size: M, color: Blue; empty for default",
+        "dataType": "Document",
+        "default": "",
+        "options": 0,
+        "ui": {
+          "keys": 0,
+          "widthName": 104,
+          "widthComment": 357,
+          "widthDataType": 75,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 0,
+          "createAt": 0
+        }
+      },
+      "product_variants.sku": {
+        "id": "product_variants.sku",
+        "tableId": "product_variants",
+        "name": "sku",
+        "comment": "Shop-specific stock keeping unit",
+        "dataType": "String",
+        "default": "",
+        "options": 0,
+        "ui": {
+          "keys": 0,
+          "widthName": 85,
+          "widthComment": 224,
+          "widthDataType": 75,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 0,
+          "createAt": 0
+        }
+      },
+      "product_variants.price": {
+        "id": "product_variants.price",
+        "tableId": "product_variants",
+        "name": "price",
+        "comment": "Actual selling price for this variant",
+        "dataType": "Decimal128",
+        "default": "",
+        "options": 8,
+        "ui": {
+          "keys": 0,
+          "widthName": 85,
+          "widthComment": 259,
+          "widthDataType": 80,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 0,
+          "createAt": 0
+        }
+      },
+      "product_variants.compare_at_price": {
+        "id": "product_variants.compare_at_price",
+        "tableId": "product_variants",
+        "name": "compare_at_price",
+        "comment": "Optional original price",
+        "dataType": "Decimal128",
+        "default": "",
+        "options": 0,
+        "ui": {
+          "keys": 0,
+          "widthName": 128,
+          "widthComment": 161,
+          "widthDataType": 80,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 0,
+          "createAt": 0
+        }
+      },
+      "product_variants.images": {
+        "id": "product_variants.images",
+        "tableId": "product_variants",
+        "name": "images",
+        "comment": "Optional images specific to this variant",
+        "dataType": "Array<Document>",
+        "default": "",
+        "options": 0,
+        "ui": {
+          "keys": 0,
+          "widthName": 85,
+          "widthComment": 280,
+          "widthDataType": 120,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 0,
+          "createAt": 0
+        }
+      },
+      "product_variants.position": {
+        "id": "product_variants.position",
+        "tableId": "product_variants",
+        "name": "position",
+        "comment": "Display order",
+        "dataType": "Int32",
+        "default": "",
+        "options": 0,
+        "ui": {
+          "keys": 0,
+          "widthName": 85,
+          "widthComment": 91,
+          "widthDataType": 75,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 0,
+          "createAt": 0
+        }
+      },
+      "product_variants.created_at": {
+        "id": "product_variants.created_at",
+        "tableId": "product_variants",
+        "name": "created_at",
+        "comment": "",
+        "dataType": "Date",
+        "default": "",
+        "options": 8,
+        "ui": {
+          "keys": 0,
+          "widthName": 85,
+          "widthComment": 60,
+          "widthDataType": 75,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 0,
+          "createAt": 0
+        }
+      },
+      "product_variants.updated_at": {
+        "id": "product_variants.updated_at",
+        "tableId": "product_variants",
+        "name": "updated_at",
+        "comment": "",
+        "dataType": "Date",
+        "default": "",
+        "options": 8,
+        "ui": {
+          "keys": 0,
+          "widthName": 85,
+          "widthComment": 60,
+          "widthDataType": 75,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 0,
+          "createAt": 0
+        }
+      },
+      "products.visibility": {
+        "id": "products.visibility",
+        "tableId": "products",
+        "name": "visibility",
+        "comment": "customer, wholesale_buyer, or both; outer limit for variants",
+        "dataType": "String",
+        "default": "",
+        "options": 8,
+        "ui": {
+          "keys": 0,
+          "widthName": 85,
+          "widthComment": 340,
+          "widthDataType": 75,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 0,
+          "createAt": 0
+        }
+      },
+      "product_variants.visibility_override": {
+        "id": "product_variants.visibility_override",
+        "tableId": "product_variants",
+        "name": "visibility_override",
+        "comment": "inherit, customer, wholesale_buyer, or both; cannot widen product visibility",
+        "dataType": "String",
+        "default": "inherit",
+        "options": 8,
+        "ui": {
+          "keys": 0,
+          "widthName": 150,
+          "widthComment": 470,
+          "widthDataType": 75,
+          "widthDefault": 85
+        },
+        "meta": {
+          "updateAt": 0,
+          "createAt": 0
+        }
+      },
+      "carts._id": {
+        "id": "carts._id",
+        "tableId": "carts",
+        "name": "_id",
+        "comment": "MongoDB cart ID",
+        "dataType": "ObjectId",
+        "default": "",
+        "options": 10,
+        "ui": {
+          "keys": 1,
+          "widthName": 85,
+          "widthComment": 105,
+          "widthDataType": 75,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 0,
+          "createAt": 0
+        }
+      },
+      "carts.organization_id": {
+        "id": "carts.organization_id",
+        "tableId": "carts",
+        "name": "organization_id",
+        "comment": "Shop that owns this cart",
+        "dataType": "ObjectId",
+        "default": "",
+        "options": 8,
+        "ui": {
+          "keys": 2,
+          "widthName": 120,
+          "widthComment": 168,
+          "widthDataType": 75,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 0,
+          "createAt": 0
+        }
+      },
+      "carts.user_id": {
+        "id": "carts.user_id",
+        "tableId": "carts",
+        "name": "user_id",
+        "comment": "Signed-in buyer",
+        "dataType": "ObjectId",
+        "default": "",
+        "options": 8,
+        "ui": {
+          "keys": 2,
+          "widthName": 85,
+          "widthComment": 105,
+          "widthDataType": 75,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 0,
+          "createAt": 0
+        }
+      },
+      "carts.shopping_as": {
+        "id": "carts.shopping_as",
+        "tableId": "carts",
+        "name": "shopping_as",
+        "comment": "customer or wholesale_buyer",
+        "dataType": "String",
+        "default": "",
+        "options": 8,
+        "ui": {
+          "keys": 0,
+          "widthName": 88,
+          "widthComment": 189,
+          "widthDataType": 75,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 0,
+          "createAt": 0
+        }
+      },
+      "carts.items": {
+        "id": "carts.items",
+        "tableId": "carts",
+        "name": "items",
+        "comment": "Each: variant_id ObjectId, quantity Int32, added_at Date",
+        "dataType": "Array<Document>",
+        "default": "",
+        "options": 8,
+        "ui": {
+          "keys": 0,
+          "widthName": 85,
+          "widthComment": 392,
+          "widthDataType": 120,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 0,
+          "createAt": 0
+        }
+      },
+      "carts.created_at": {
+        "id": "carts.created_at",
+        "tableId": "carts",
+        "name": "created_at",
+        "comment": "",
+        "dataType": "Date",
+        "default": "",
+        "options": 8,
+        "ui": {
+          "keys": 0,
+          "widthName": 85,
+          "widthComment": 60,
+          "widthDataType": 75,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 0,
+          "createAt": 0
+        }
+      },
+      "carts.updated_at": {
+        "id": "carts.updated_at",
+        "tableId": "carts",
+        "name": "updated_at",
+        "comment": "",
+        "dataType": "Date",
+        "default": "",
+        "options": 8,
+        "ui": {
+          "keys": 0,
+          "widthName": 85,
+          "widthComment": 60,
+          "widthDataType": 75,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 0,
+          "createAt": 0
+        }
+      },
+      "orders._id": {
+        "id": "orders._id",
+        "tableId": "orders",
+        "name": "_id",
+        "comment": "MongoDB order ID",
+        "dataType": "ObjectId",
+        "default": "",
+        "options": 10,
+        "ui": {
+          "keys": 1,
+          "widthName": 85,
+          "widthComment": 112,
+          "widthDataType": 75,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 0,
+          "createAt": 0
+        }
+      },
+      "orders.organization_id": {
+        "id": "orders.organization_id",
+        "tableId": "orders",
+        "name": "organization_id",
+        "comment": "Shop that owns this order",
+        "dataType": "ObjectId",
+        "default": "",
+        "options": 8,
+        "ui": {
+          "keys": 2,
+          "widthName": 120,
+          "widthComment": 175,
+          "widthDataType": 75,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 0,
+          "createAt": 0
+        }
+      },
+      "orders.user_id": {
+        "id": "orders.user_id",
+        "tableId": "orders",
+        "name": "user_id",
+        "comment": "Buyer login",
+        "dataType": "ObjectId",
+        "default": "",
+        "options": 8,
+        "ui": {
+          "keys": 2,
+          "widthName": 85,
+          "widthComment": 77,
+          "widthDataType": 75,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 0,
+          "createAt": 0
+        }
+      },
+      "orders.order_number": {
+        "id": "orders.order_number",
+        "tableId": "orders",
+        "name": "order_number",
+        "comment": "Human-readable number unique within this shop",
+        "dataType": "String",
+        "default": "",
+        "options": 8,
+        "ui": {
+          "keys": 0,
+          "widthName": 96,
+          "widthComment": 315,
+          "widthDataType": 75,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 0,
+          "createAt": 0
+        }
+      },
+      "orders.shopping_as": {
+        "id": "orders.shopping_as",
+        "tableId": "orders",
+        "name": "shopping_as",
+        "comment": "customer or wholesale_buyer at purchase",
+        "dataType": "String",
+        "default": "",
+        "options": 8,
+        "ui": {
+          "keys": 0,
+          "widthName": 88,
+          "widthComment": 273,
+          "widthDataType": 75,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 0,
+          "createAt": 0
+        }
+      },
+      "orders.buyer_snapshot": {
+        "id": "orders.buyer_snapshot",
+        "tableId": "orders",
+        "name": "buyer_snapshot",
+        "comment": "Name, email, and company name at purchase",
+        "dataType": "Document",
+        "default": "",
+        "options": 8,
+        "ui": {
+          "keys": 0,
+          "widthName": 112,
+          "widthComment": 287,
+          "widthDataType": 75,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 0,
+          "createAt": 0
+        }
+      },
+      "orders.line_items": {
+        "id": "orders.line_items",
+        "tableId": "orders",
+        "name": "line_items",
+        "comment": "Each: line_item_id, product_id, variant_id, title, options, sku, quantity, unit_price, line_total",
+        "dataType": "Array<Document>",
+        "default": "",
+        "options": 8,
+        "ui": {
+          "keys": 0,
+          "widthName": 85,
+          "widthComment": 679,
+          "widthDataType": 120,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 0,
+          "createAt": 0
+        }
+      },
+      "orders.currency": {
+        "id": "orders.currency",
+        "tableId": "orders",
+        "name": "currency",
+        "comment": "Currency code for every amount in this order",
+        "dataType": "String",
+        "default": "",
+        "options": 8,
+        "ui": {
+          "keys": 0,
+          "widthName": 85,
+          "widthComment": 308,
+          "widthDataType": 75,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 0,
+          "createAt": 0
+        }
+      },
+      "orders.subtotal_amount": {
+        "id": "orders.subtotal_amount",
+        "tableId": "orders",
+        "name": "subtotal_amount",
+        "comment": "Sum of item totals before discounts and charges",
+        "dataType": "Decimal128",
+        "default": "",
+        "options": 8,
+        "ui": {
+          "keys": 0,
+          "widthName": 120,
+          "widthComment": 329,
+          "widthDataType": 80,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 0,
+          "createAt": 0
+        }
+      },
+      "orders.discount_amount": {
+        "id": "orders.discount_amount",
+        "tableId": "orders",
+        "name": "discount_amount",
+        "comment": "",
+        "dataType": "Decimal128",
+        "default": "0",
+        "options": 8,
+        "ui": {
+          "keys": 0,
+          "widthName": 120,
+          "widthComment": 60,
+          "widthDataType": 80,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 0,
+          "createAt": 0
+        }
+      },
+      "orders.shipping_amount": {
+        "id": "orders.shipping_amount",
+        "tableId": "orders",
+        "name": "shipping_amount",
+        "comment": "",
+        "dataType": "Decimal128",
+        "default": "0",
+        "options": 8,
+        "ui": {
+          "keys": 0,
+          "widthName": 120,
+          "widthComment": 60,
+          "widthDataType": 80,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 0,
+          "createAt": 0
+        }
+      },
+      "orders.tax_amount": {
+        "id": "orders.tax_amount",
+        "tableId": "orders",
+        "name": "tax_amount",
+        "comment": "",
+        "dataType": "Decimal128",
+        "default": "0",
+        "options": 8,
+        "ui": {
+          "keys": 0,
+          "widthName": 85,
+          "widthComment": 60,
+          "widthDataType": 80,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 0,
+          "createAt": 0
+        }
+      },
+      "orders.total_amount": {
+        "id": "orders.total_amount",
+        "tableId": "orders",
+        "name": "total_amount",
+        "comment": "Final amount charged",
+        "dataType": "Decimal128",
+        "default": "",
+        "options": 8,
+        "ui": {
+          "keys": 0,
+          "widthName": 96,
+          "widthComment": 140,
+          "widthDataType": 80,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 0,
+          "createAt": 0
+        }
+      },
+      "orders.shipping_address": {
+        "id": "orders.shipping_address",
+        "tableId": "orders",
+        "name": "shipping_address",
+        "comment": "Address snapshot for delivery",
+        "dataType": "Document",
+        "default": "",
+        "options": 0,
+        "ui": {
+          "keys": 0,
+          "widthName": 128,
+          "widthComment": 203,
+          "widthDataType": 75,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 0,
+          "createAt": 0
+        }
+      },
+      "orders.billing_address": {
+        "id": "orders.billing_address",
+        "tableId": "orders",
+        "name": "billing_address",
+        "comment": "Address snapshot for invoice",
+        "dataType": "Document",
+        "default": "",
+        "options": 0,
+        "ui": {
+          "keys": 0,
+          "widthName": 120,
+          "widthComment": 196,
+          "widthDataType": 75,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 0,
+          "createAt": 0
+        }
+      },
+      "orders.order_status": {
+        "id": "orders.order_status",
+        "tableId": "orders",
+        "name": "order_status",
+        "comment": "placed, confirmed, cancelled, or completed",
+        "dataType": "String",
+        "default": "placed",
+        "options": 8,
+        "ui": {
+          "keys": 0,
+          "widthName": 96,
+          "widthComment": 294,
+          "widthDataType": 75,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 0,
+          "createAt": 0
+        }
+      },
+      "orders.payment_status": {
+        "id": "orders.payment_status",
+        "tableId": "orders",
+        "name": "payment_status",
+        "comment": "unpaid, paid, partially_refunded, or refunded",
+        "dataType": "String",
+        "default": "unpaid",
+        "options": 8,
+        "ui": {
+          "keys": 0,
+          "widthName": 112,
+          "widthComment": 315,
+          "widthDataType": 75,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 0,
+          "createAt": 0
+        }
+      },
+      "orders.fulfillment_status": {
+        "id": "orders.fulfillment_status",
+        "tableId": "orders",
+        "name": "fulfillment_status",
+        "comment": "Order summary across shipments: unfulfilled, partially_fulfilled, or fulfilled",
+        "dataType": "String",
+        "default": "unfulfilled",
+        "options": 8,
+        "ui": {
+          "keys": 0,
+          "widthName": 144,
+          "widthComment": 546,
+          "widthDataType": 75,
+          "widthDefault": 88
+        },
+        "meta": {
+          "updateAt": 0,
+          "createAt": 0
+        }
+      },
+      "orders.payment_reference": {
+        "id": "orders.payment_reference",
+        "tableId": "orders",
+        "name": "payment_reference",
+        "comment": "Latest provider IDs; full history in payment_transactions",
+        "dataType": "Document",
+        "default": "",
+        "options": 0,
+        "ui": {
+          "keys": 0,
+          "widthName": 136,
+          "widthComment": 350,
+          "widthDataType": 75,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 0,
+          "createAt": 0
+        }
+      },
+      "orders.placed_at": {
+        "id": "orders.placed_at",
+        "tableId": "orders",
+        "name": "placed_at",
+        "comment": "",
+        "dataType": "Date",
+        "default": "",
+        "options": 8,
+        "ui": {
+          "keys": 0,
+          "widthName": 85,
+          "widthComment": 60,
+          "widthDataType": 75,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 0,
+          "createAt": 0
+        }
+      },
+      "orders.updated_at": {
+        "id": "orders.updated_at",
+        "tableId": "orders",
+        "name": "updated_at",
+        "comment": "",
+        "dataType": "Date",
+        "default": "",
+        "options": 8,
+        "ui": {
+          "keys": 0,
+          "widthName": 85,
+          "widthComment": 60,
+          "widthDataType": 75,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 0,
+          "createAt": 0
+        }
+      },
+      "payment_transactions._id": {
+        "id": "payment_transactions._id",
+        "tableId": "payment_transactions",
+        "name": "_id",
+        "comment": "MongoDB transaction record ID",
+        "dataType": "ObjectId",
+        "default": "",
+        "options": 10,
+        "ui": {
+          "keys": 1,
+          "widthName": 85,
+          "widthComment": 203,
+          "widthDataType": 75,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 0,
+          "createAt": 0
+        }
+      },
+      "payment_transactions.organization_id": {
+        "id": "payment_transactions.organization_id",
+        "tableId": "payment_transactions",
+        "name": "organization_id",
+        "comment": "Shop receiving this payment",
+        "dataType": "ObjectId",
+        "default": "",
+        "options": 8,
+        "ui": {
+          "keys": 2,
+          "widthName": 120,
+          "widthComment": 189,
+          "widthDataType": 75,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 0,
+          "createAt": 0
+        }
+      },
+      "payment_transactions.order_id": {
+        "id": "payment_transactions.order_id",
+        "tableId": "payment_transactions",
+        "name": "order_id",
+        "comment": "References orders._id",
+        "dataType": "ObjectId",
+        "default": "",
+        "options": 8,
+        "ui": {
+          "keys": 2,
+          "widthName": 85,
+          "widthComment": 147,
+          "widthDataType": 75,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 0,
+          "createAt": 0
+        }
+      },
+      "payment_transactions.provider": {
+        "id": "payment_transactions.provider",
+        "tableId": "payment_transactions",
+        "name": "provider",
+        "comment": "For example razorpay",
+        "dataType": "String",
+        "default": "",
+        "options": 8,
+        "ui": {
+          "keys": 0,
+          "widthName": 85,
+          "widthComment": 140,
+          "widthDataType": 75,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 0,
+          "createAt": 0
+        }
+      },
+      "payment_transactions.event_key": {
+        "id": "payment_transactions.event_key",
+        "tableId": "payment_transactions",
+        "name": "event_key",
+        "comment": "Stable dedupe key for this provider event or action",
+        "dataType": "String",
+        "default": "",
+        "options": 8,
+        "ui": {
+          "keys": 0,
+          "widthName": 85,
+          "widthComment": 357,
+          "widthDataType": 75,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 0,
+          "createAt": 0
+        }
+      },
+      "payment_transactions.transaction_type": {
+        "id": "payment_transactions.transaction_type",
+        "tableId": "payment_transactions",
+        "name": "transaction_type",
+        "comment": "attempt, authorization, capture, refund, or chargeback",
+        "dataType": "String",
+        "default": "",
+        "options": 8,
+        "ui": {
+          "keys": 0,
+          "widthName": 128,
+          "widthComment": 378,
+          "widthDataType": 75,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 0,
+          "createAt": 0
+        }
+      },
+      "payment_transactions.status": {
+        "id": "payment_transactions.status",
+        "tableId": "payment_transactions",
+        "name": "status",
+        "comment": "pending, succeeded, failed, or reversed",
+        "dataType": "String",
+        "default": "",
+        "options": 8,
+        "ui": {
+          "keys": 0,
+          "widthName": 85,
+          "widthComment": 273,
+          "widthDataType": 75,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 0,
+          "createAt": 0
+        }
+      },
+      "payment_transactions.amount": {
+        "id": "payment_transactions.amount",
+        "tableId": "payment_transactions",
+        "name": "amount",
+        "comment": "Amount in major currency units; refund amounts are positive",
+        "dataType": "Decimal128",
+        "default": "",
+        "options": 8,
+        "ui": {
+          "keys": 0,
+          "widthName": 85,
+          "widthComment": 413,
+          "widthDataType": 80,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 0,
+          "createAt": 0
+        }
+      },
+      "payment_transactions.currency": {
+        "id": "payment_transactions.currency",
+        "tableId": "payment_transactions",
+        "name": "currency",
+        "comment": "ISO currency code",
+        "dataType": "String",
+        "default": "",
+        "options": 8,
+        "ui": {
+          "keys": 0,
+          "widthName": 85,
+          "widthComment": 119,
+          "widthDataType": 75,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 0,
+          "createAt": 0
+        }
+      },
+      "payment_transactions.payment_method": {
+        "id": "payment_transactions.payment_method",
+        "tableId": "payment_transactions",
+        "name": "payment_method",
+        "comment": "Method category only, such as UPI or card",
+        "dataType": "String",
+        "default": "",
+        "options": 0,
+        "ui": {
+          "keys": 0,
+          "widthName": 112,
+          "widthComment": 287,
+          "widthDataType": 75,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 0,
+          "createAt": 0
+        }
+      },
+      "payment_transactions.provider_order_id": {
+        "id": "payment_transactions.provider_order_id",
+        "tableId": "payment_transactions",
+        "name": "provider_order_id",
+        "comment": "Provider's order ID",
+        "dataType": "String",
+        "default": "",
+        "options": 0,
+        "ui": {
+          "keys": 0,
+          "widthName": 136,
+          "widthComment": 133,
+          "widthDataType": 75,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 0,
+          "createAt": 0
+        }
+      },
+      "payment_transactions.provider_payment_id": {
+        "id": "payment_transactions.provider_payment_id",
+        "tableId": "payment_transactions",
+        "name": "provider_payment_id",
+        "comment": "Provider's payment ID",
+        "dataType": "String",
+        "default": "",
+        "options": 0,
+        "ui": {
+          "keys": 0,
+          "widthName": 152,
+          "widthComment": 147,
+          "widthDataType": 75,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 0,
+          "createAt": 0
+        }
+      },
+      "payment_transactions.provider_refund_id": {
+        "id": "payment_transactions.provider_refund_id",
+        "tableId": "payment_transactions",
+        "name": "provider_refund_id",
+        "comment": "Provider's refund ID, when applicable",
+        "dataType": "String",
+        "default": "",
+        "options": 0,
+        "ui": {
+          "keys": 0,
+          "widthName": 144,
+          "widthComment": 259,
+          "widthDataType": 75,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 0,
+          "createAt": 0
+        }
+      },
+      "payment_transactions.provider_event_id": {
+        "id": "payment_transactions.provider_event_id",
+        "tableId": "payment_transactions",
+        "name": "provider_event_id",
+        "comment": "Webhook event ID, when available",
+        "dataType": "String",
+        "default": "",
+        "options": 0,
+        "ui": {
+          "keys": 0,
+          "widthName": 136,
+          "widthComment": 224,
+          "widthDataType": 75,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 0,
+          "createAt": 0
+        }
+      },
+      "payment_transactions.provider_details": {
+        "id": "payment_transactions.provider_details",
+        "tableId": "payment_transactions",
+        "name": "provider_details",
+        "comment": "Allowlisted provider metadata; no card data or API secrets",
+        "dataType": "Document",
+        "default": "",
+        "options": 0,
+        "ui": {
+          "keys": 0,
+          "widthName": 128,
+          "widthComment": 406,
+          "widthDataType": 75,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 0,
+          "createAt": 0
+        }
+      },
+      "payment_transactions.failure_code": {
+        "id": "payment_transactions.failure_code",
+        "tableId": "payment_transactions",
+        "name": "failure_code",
+        "comment": "Provider error code when an action fails",
+        "dataType": "String",
+        "default": "",
+        "options": 0,
+        "ui": {
+          "keys": 0,
+          "widthName": 96,
+          "widthComment": 280,
+          "widthDataType": 75,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 0,
+          "createAt": 0
+        }
+      },
+      "payment_transactions.occurred_at": {
+        "id": "payment_transactions.occurred_at",
+        "tableId": "payment_transactions",
+        "name": "occurred_at",
+        "comment": "Time reported by provider or internal action",
+        "dataType": "Date",
+        "default": "",
+        "options": 8,
+        "ui": {
+          "keys": 0,
+          "widthName": 88,
+          "widthComment": 308,
+          "widthDataType": 75,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 0,
+          "createAt": 0
+        }
+      },
+      "payment_transactions.created_at": {
+        "id": "payment_transactions.created_at",
+        "tableId": "payment_transactions",
+        "name": "created_at",
+        "comment": "Time this record was stored",
+        "dataType": "Date",
+        "default": "",
+        "options": 8,
+        "ui": {
+          "keys": 0,
+          "widthName": 85,
+          "widthComment": 189,
+          "widthDataType": 75,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 0,
+          "createAt": 0
+        }
+      },
+      "shipments._id": {
+        "id": "shipments._id",
+        "tableId": "shipments",
+        "name": "_id",
+        "comment": "MongoDB shipment ID",
+        "dataType": "ObjectId",
+        "default": "",
+        "options": 10,
+        "ui": {
+          "keys": 1,
+          "widthName": 85,
+          "widthComment": 133,
+          "widthDataType": 75,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 0,
+          "createAt": 0
+        }
+      },
+      "shipments.organization_id": {
+        "id": "shipments.organization_id",
+        "tableId": "shipments",
+        "name": "organization_id",
+        "comment": "Shop that owns this shipment",
+        "dataType": "ObjectId",
+        "default": "",
+        "options": 8,
+        "ui": {
+          "keys": 2,
+          "widthName": 120,
+          "widthComment": 196,
+          "widthDataType": 75,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 0,
+          "createAt": 0
+        }
+      },
+      "shipments.order_id": {
+        "id": "shipments.order_id",
+        "tableId": "shipments",
+        "name": "order_id",
+        "comment": "References orders._id",
+        "dataType": "ObjectId",
+        "default": "",
+        "options": 8,
+        "ui": {
+          "keys": 2,
+          "widthName": 85,
+          "widthComment": 147,
+          "widthDataType": 75,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 0,
+          "createAt": 0
+        }
+      },
+      "shipments.items": {
+        "id": "shipments.items",
+        "tableId": "shipments",
+        "name": "items",
+        "comment": "Each: order_line_item_id, quantity shipped in this package",
+        "dataType": "Array<Document>",
+        "default": "",
+        "options": 8,
+        "ui": {
+          "keys": 0,
+          "widthName": 85,
+          "widthComment": 406,
+          "widthDataType": 120,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 0,
+          "createAt": 0
+        }
+      },
+      "shipments.ship_to_address": {
+        "id": "shipments.ship_to_address",
+        "tableId": "shipments",
+        "name": "ship_to_address",
+        "comment": "Delivery address snapshot for this package",
+        "dataType": "Document",
+        "default": "",
+        "options": 8,
+        "ui": {
+          "keys": 0,
+          "widthName": 120,
+          "widthComment": 294,
+          "widthDataType": 75,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 0,
+          "createAt": 0
+        }
+      },
+      "shipments.managed_by_user_id": {
+        "id": "shipments.managed_by_user_id",
+        "tableId": "shipments",
+        "name": "managed_by_user_id",
+        "comment": "Shop staff user responsible; optional for carrier automation",
+        "dataType": "ObjectId",
+        "default": "",
+        "options": 0,
+        "ui": {
+          "keys": 2,
+          "widthName": 144,
+          "widthComment": 420,
+          "widthDataType": 75,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 0,
+          "createAt": 0
+        }
+      },
+      "shipments.shipping_provider": {
+        "id": "shipments.shipping_provider",
+        "tableId": "shipments",
+        "name": "shipping_provider",
+        "comment": "Carrier or shipping service name, if used",
+        "dataType": "String",
+        "default": "",
+        "options": 0,
+        "ui": {
+          "keys": 0,
+          "widthName": 136,
+          "widthComment": 287,
+          "widthDataType": 75,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 0,
+          "createAt": 0
+        }
+      },
+      "shipments.provider_shipment_id": {
+        "id": "shipments.provider_shipment_id",
+        "tableId": "shipments",
+        "name": "provider_shipment_id",
+        "comment": "Shipment ID assigned by shipping provider",
+        "dataType": "String",
+        "default": "",
+        "options": 0,
+        "ui": {
+          "keys": 0,
+          "widthName": 160,
+          "widthComment": 287,
+          "widthDataType": 75,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 0,
+          "createAt": 0
+        }
+      },
+      "shipments.service_level": {
+        "id": "shipments.service_level",
+        "tableId": "shipments",
+        "name": "service_level",
+        "comment": "For example standard, express, or same_day",
+        "dataType": "String",
+        "default": "",
+        "options": 0,
+        "ui": {
+          "keys": 0,
+          "widthName": 104,
+          "widthComment": 294,
+          "widthDataType": 75,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 0,
+          "createAt": 0
+        }
+      },
+      "shipments.tracking_number": {
+        "id": "shipments.tracking_number",
+        "tableId": "shipments",
+        "name": "tracking_number",
+        "comment": "Carrier tracking or consignment number",
+        "dataType": "String",
+        "default": "",
+        "options": 0,
+        "ui": {
+          "keys": 0,
+          "widthName": 120,
+          "widthComment": 266,
+          "widthDataType": 75,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 0,
+          "createAt": 0
+        }
+      },
+      "shipments.tracking_url": {
+        "id": "shipments.tracking_url",
+        "tableId": "shipments",
+        "name": "tracking_url",
+        "comment": "Public carrier tracking link",
+        "dataType": "String",
+        "default": "",
+        "options": 0,
+        "ui": {
+          "keys": 0,
+          "widthName": 96,
+          "widthComment": 196,
+          "widthDataType": 75,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 0,
+          "createAt": 0
+        }
+      },
+      "shipments.label_file_ref": {
+        "id": "shipments.label_file_ref",
+        "tableId": "shipments",
+        "name": "label_file_ref",
+        "comment": "Private shipping label file reference",
+        "dataType": "String",
+        "default": "",
+        "options": 0,
+        "ui": {
+          "keys": 0,
+          "widthName": 112,
+          "widthComment": 259,
+          "widthDataType": 75,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 0,
+          "createAt": 0
+        }
+      },
+      "shipments.provider_details": {
+        "id": "shipments.provider_details",
+        "tableId": "shipments",
+        "name": "provider_details",
+        "comment": "Allowlisted provider metadata; no API credentials",
+        "dataType": "Document",
+        "default": "",
+        "options": 0,
+        "ui": {
+          "keys": 0,
+          "widthName": 128,
+          "widthComment": 343,
+          "widthDataType": 75,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 0,
+          "createAt": 0
+        }
+      },
+      "shipments.status": {
+        "id": "shipments.status",
+        "tableId": "shipments",
+        "name": "status",
+        "comment": "pending, packed, shipped, in_transit, out_for_delivery, delivered, failed, or returned",
+        "dataType": "String",
+        "default": "pending",
+        "options": 8,
+        "ui": {
+          "keys": 0,
+          "widthName": 85,
+          "widthComment": 602,
+          "widthDataType": 75,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 0,
+          "createAt": 0
+        }
+      },
+      "shipments.estimated_delivery_at": {
+        "id": "shipments.estimated_delivery_at",
+        "tableId": "shipments",
+        "name": "estimated_delivery_at",
+        "comment": "Estimated delivery time, if known",
+        "dataType": "Date",
+        "default": "",
+        "options": 0,
+        "ui": {
+          "keys": 0,
+          "widthName": 168,
+          "widthComment": 231,
+          "widthDataType": 75,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 0,
+          "createAt": 0
+        }
+      },
+      "shipments.shipped_at": {
+        "id": "shipments.shipped_at",
+        "tableId": "shipments",
+        "name": "shipped_at",
+        "comment": "Actual carrier handoff time",
+        "dataType": "Date",
+        "default": "",
+        "options": 0,
+        "ui": {
+          "keys": 0,
+          "widthName": 85,
+          "widthComment": 189,
+          "widthDataType": 75,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 0,
+          "createAt": 0
+        }
+      },
+      "shipments.delivered_at": {
+        "id": "shipments.delivered_at",
+        "tableId": "shipments",
+        "name": "delivered_at",
+        "comment": "Actual delivery time",
+        "dataType": "Date",
+        "default": "",
+        "options": 0,
+        "ui": {
+          "keys": 0,
+          "widthName": 96,
+          "widthComment": 140,
+          "widthDataType": 75,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 0,
+          "createAt": 0
+        }
+      },
+      "shipments.created_at": {
+        "id": "shipments.created_at",
+        "tableId": "shipments",
+        "name": "created_at",
+        "comment": "Time shipment record was created",
+        "dataType": "Date",
+        "default": "",
+        "options": 8,
+        "ui": {
+          "keys": 0,
+          "widthName": 85,
+          "widthComment": 224,
+          "widthDataType": 75,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 0,
+          "createAt": 0
+        }
+      },
+      "shipments.updated_at": {
+        "id": "shipments.updated_at",
+        "tableId": "shipments",
+        "name": "updated_at",
+        "comment": "Time shipment summary last changed",
+        "dataType": "Date",
+        "default": "",
+        "options": 8,
+        "ui": {
+          "keys": 0,
+          "widthName": 85,
+          "widthComment": 238,
+          "widthDataType": 75,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 0,
+          "createAt": 0
+        }
+      },
+      "shipment_events._id": {
+        "id": "shipment_events._id",
+        "tableId": "shipment_events",
+        "name": "_id",
+        "comment": "MongoDB shipment event ID",
+        "dataType": "ObjectId",
+        "default": "",
+        "options": 10,
+        "ui": {
+          "keys": 1,
+          "widthName": 85,
+          "widthComment": 175,
+          "widthDataType": 75,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 0,
+          "createAt": 0
+        }
+      },
+      "shipment_events.organization_id": {
+        "id": "shipment_events.organization_id",
+        "tableId": "shipment_events",
+        "name": "organization_id",
+        "comment": "Shop that owns this event",
+        "dataType": "ObjectId",
+        "default": "",
+        "options": 8,
+        "ui": {
+          "keys": 2,
+          "widthName": 120,
+          "widthComment": 175,
+          "widthDataType": 75,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 0,
+          "createAt": 0
+        }
+      },
+      "shipment_events.shipment_id": {
+        "id": "shipment_events.shipment_id",
+        "tableId": "shipment_events",
+        "name": "shipment_id",
+        "comment": "References shipments._id",
+        "dataType": "ObjectId",
+        "default": "",
+        "options": 8,
+        "ui": {
+          "keys": 2,
+          "widthName": 88,
+          "widthComment": 168,
+          "widthDataType": 75,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 0,
+          "createAt": 0
+        }
+      },
+      "shipment_events.event_key": {
+        "id": "shipment_events.event_key",
+        "tableId": "shipment_events",
+        "name": "event_key",
+        "comment": "Stable dedupe key for this event within the shipment",
+        "dataType": "String",
+        "default": "",
+        "options": 8,
+        "ui": {
+          "keys": 0,
+          "widthName": 85,
+          "widthComment": 364,
+          "widthDataType": 75,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 0,
+          "createAt": 0
+        }
+      },
+      "shipment_events.status": {
+        "id": "shipment_events.status",
+        "tableId": "shipment_events",
+        "name": "status",
+        "comment": "Shipment status reached at this step",
+        "dataType": "String",
+        "default": "",
+        "options": 8,
+        "ui": {
+          "keys": 0,
+          "widthName": 85,
+          "widthComment": 252,
+          "widthDataType": 75,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 0,
+          "createAt": 0
+        }
+      },
+      "shipment_events.message": {
+        "id": "shipment_events.message",
+        "tableId": "shipment_events",
+        "name": "message",
+        "comment": "Human-readable update from carrier or staff",
+        "dataType": "String",
+        "default": "",
+        "options": 0,
+        "ui": {
+          "keys": 0,
+          "widthName": 85,
+          "widthComment": 301,
+          "widthDataType": 75,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 0,
+          "createAt": 0
+        }
+      },
+      "shipment_events.location": {
+        "id": "shipment_events.location",
+        "tableId": "shipment_events",
+        "name": "location",
+        "comment": "Optional city, state, postal code, and country",
+        "dataType": "Document",
+        "default": "",
+        "options": 0,
+        "ui": {
+          "keys": 0,
+          "widthName": 85,
+          "widthComment": 322,
+          "widthDataType": 75,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 0,
+          "createAt": 0
+        }
+      },
+      "shipment_events.source": {
+        "id": "shipment_events.source",
+        "tableId": "shipment_events",
+        "name": "source",
+        "comment": "staff, carrier_webhook, or system",
+        "dataType": "String",
+        "default": "",
+        "options": 8,
+        "ui": {
+          "keys": 0,
+          "widthName": 85,
+          "widthComment": 231,
+          "widthDataType": 75,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 0,
+          "createAt": 0
+        }
+      },
+      "shipment_events.recorded_by_user_id": {
+        "id": "shipment_events.recorded_by_user_id",
+        "tableId": "shipment_events",
+        "name": "recorded_by_user_id",
+        "comment": "Staff user who recorded this step, if applicable",
+        "dataType": "ObjectId",
+        "default": "",
+        "options": 0,
+        "ui": {
+          "keys": 2,
+          "widthName": 152,
+          "widthComment": 336,
+          "widthDataType": 75,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 0,
+          "createAt": 0
+        }
+      },
+      "shipment_events.provider_event_id": {
+        "id": "shipment_events.provider_event_id",
+        "tableId": "shipment_events",
+        "name": "provider_event_id",
+        "comment": "Carrier event ID, when available",
+        "dataType": "String",
+        "default": "",
+        "options": 0,
+        "ui": {
+          "keys": 0,
+          "widthName": 136,
+          "widthComment": 224,
+          "widthDataType": 75,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 0,
+          "createAt": 0
+        }
+      },
+      "shipment_events.occurred_at": {
+        "id": "shipment_events.occurred_at",
+        "tableId": "shipment_events",
+        "name": "occurred_at",
+        "comment": "When the step happened; may arrive late",
+        "dataType": "Date",
+        "default": "",
+        "options": 8,
+        "ui": {
+          "keys": 0,
+          "widthName": 88,
+          "widthComment": 273,
+          "widthDataType": 75,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 0,
+          "createAt": 0
+        }
+      },
+      "shipment_events.created_at": {
+        "id": "shipment_events.created_at",
+        "tableId": "shipment_events",
+        "name": "created_at",
+        "comment": "When this event was stored",
+        "dataType": "Date",
+        "default": "",
+        "options": 8,
+        "ui": {
+          "keys": 0,
+          "widthName": 85,
+          "widthComment": 182,
+          "widthDataType": 75,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 0,
+          "createAt": 0
+        }
+      },
+      "shipments.managed_by_type": {
+        "id": "shipments.managed_by_type",
+        "tableId": "shipments",
+        "name": "managed_by_type",
+        "comment": "shop_staff or shipping_provider",
+        "dataType": "String",
+        "default": "shop_staff",
+        "options": 8,
+        "ui": {
+          "keys": 0,
+          "widthName": 120,
+          "widthComment": 217,
+          "widthDataType": 75,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 0,
+          "createAt": 0
+        }
+      },
+      "product_variants.stock_quantity": {
+        "id": "product_variants.stock_quantity",
+        "tableId": "product_variants",
+        "name": "stock_quantity",
+        "comment": "Inventory for this variant",
+        "dataType": "Int32",
+        "default": "0",
+        "options": 8,
+        "ui": {
+          "keys": 0,
+          "widthName": 112,
+          "widthComment": 182,
+          "widthDataType": 75,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 0,
+          "createAt": 0
+        }
+      }
+    },
+    "relationshipEntities": {
+      "organizations_to_organization_role": {
+        "id": "organizations_to_organization_role",
+        "identification": false,
+        "relationshipType": 4,
+        "startRelationshipType": 1,
+        "start": {
+          "tableId": "organizations",
+          "columnIds": [
+            "organizations._id"
+          ],
+          "x": 430,
+          "y": 600,
+          "direction": 8
+        },
+        "end": {
+          "tableId": "organization_role",
+          "columnIds": [
+            "organization_role.organization_id"
+          ],
+          "x": 790,
+          "y": 970,
+          "direction": 4
+        },
+        "meta": {
+          "updateAt": 0,
+          "createAt": 0
+        }
+      },
+      "users_to_organization_role": {
+        "id": "users_to_organization_role",
+        "identification": false,
+        "relationshipType": 4,
+        "startRelationshipType": 1,
+        "start": {
+          "tableId": "users",
+          "columnIds": [
+            "users._id"
+          ],
+          "x": 1370,
+          "y": 620,
+          "direction": 8
+        },
+        "end": {
+          "tableId": "organization_role",
+          "columnIds": [
+            "organization_role.user_id"
+          ],
+          "x": 1050,
+          "y": 970,
+          "direction": 4
+        },
+        "meta": {
+          "updateAt": 0,
+          "createAt": 0
+        }
+      },
+      "organizations_to_wholesale_buyer_profiles": {
+        "id": "organizations_to_wholesale_buyer_profiles",
+        "identification": false,
+        "relationshipType": 4,
+        "startRelationshipType": 1,
+        "start": {
+          "tableId": "organizations",
+          "columnIds": [
+            "organizations._id"
+          ],
+          "x": 460,
+          "y": 610,
+          "direction": 8
+        },
+        "end": {
+          "tableId": "wholesale_buyer_profiles",
+          "columnIds": [
+            "wholesale_buyer_profiles.organization_id"
+          ],
+          "x": 1230,
+          "y": 1200,
+          "direction": 4
+        },
+        "meta": {
+          "updateAt": 0,
+          "createAt": 0
+        }
+      },
+      "users_to_wholesale_buyer_profiles": {
+        "id": "users_to_wholesale_buyer_profiles",
+        "identification": false,
+        "relationshipType": 4,
+        "startRelationshipType": 1,
+        "start": {
+          "tableId": "users",
+          "columnIds": [
+            "users._id"
+          ],
+          "x": 1440,
+          "y": 630,
+          "direction": 8
+        },
+        "end": {
+          "tableId": "wholesale_buyer_profiles",
+          "columnIds": [
+            "wholesale_buyer_profiles.user_id"
+          ],
+          "x": 1490,
+          "y": 1110,
+          "direction": 4
+        },
+        "meta": {
+          "updateAt": 0,
+          "createAt": 0
+        }
+      },
+      "organizations_to_products": {
+        "id": "organizations_to_products",
+        "identification": false,
+        "relationshipType": 4,
+        "startRelationshipType": 1,
+        "start": {
+          "tableId": "organizations",
+          "columnIds": [
+            "organizations._id"
+          ],
+          "x": 370,
+          "y": 610,
+          "direction": 8
+        },
+        "end": {
+          "tableId": "products",
+          "columnIds": [
+            "products.organization_id"
+          ],
+          "x": 370,
+          "y": 1810,
+          "direction": 4
+        },
+        "meta": {
+          "updateAt": 0,
+          "createAt": 0
+        }
+      },
+      "organizations_to_product_variants": {
+        "id": "organizations_to_product_variants",
+        "identification": false,
+        "relationshipType": 4,
+        "startRelationshipType": 1,
+        "start": {
+          "tableId": "organizations",
+          "columnIds": [
+            "organizations._id"
+          ],
+          "x": 540,
+          "y": 570,
+          "direction": 8
+        },
+        "end": {
+          "tableId": "product_variants",
+          "columnIds": [
+            "product_variants.organization_id"
+          ],
+          "x": 1280,
+          "y": 1810,
+          "direction": 4
+        },
+        "meta": {
+          "updateAt": 0,
+          "createAt": 0
+        }
+      },
+      "products_to_product_variants": {
+        "id": "products_to_product_variants",
+        "identification": false,
+        "relationshipType": 4,
+        "startRelationshipType": 1,
+        "start": {
+          "tableId": "products",
+          "columnIds": [
+            "products._id"
+          ],
+          "x": 750,
+          "y": 1930,
+          "direction": 2
+        },
+        "end": {
+          "tableId": "product_variants",
+          "columnIds": [
+            "product_variants.product_id"
+          ],
+          "x": 1180,
+          "y": 1930,
+          "direction": 1
+        },
+        "meta": {
+          "updateAt": 0,
+          "createAt": 0
+        }
+      },
+      "organizations_to_carts": {
+        "id": "organizations_to_carts",
+        "identification": false,
+        "relationshipType": 4,
+        "startRelationshipType": 1,
+        "start": {
+          "tableId": "organizations",
+          "columnIds": [
+            "organizations._id"
+          ],
+          "x": 430,
+          "y": 620,
+          "direction": 8
+        },
+        "end": {
+          "tableId": "carts",
+          "columnIds": [
+            "carts.organization_id"
+          ],
+          "x": 680,
+          "y": 2500,
+          "direction": 4
+        },
+        "meta": {
+          "updateAt": 0,
+          "createAt": 0
+        }
+      },
+      "users_to_carts": {
+        "id": "users_to_carts",
+        "identification": false,
+        "relationshipType": 4,
+        "startRelationshipType": 1,
+        "start": {
+          "tableId": "users",
+          "columnIds": [
+            "users._id"
+          ],
+          "x": 1380,
+          "y": 650,
+          "direction": 8
+        },
+        "end": {
+          "tableId": "carts",
+          "columnIds": [
+            "carts.user_id"
+          ],
+          "x": 900,
+          "y": 2500,
+          "direction": 4
+        },
+        "meta": {
+          "updateAt": 0,
+          "createAt": 0
+        }
+      },
+      "organizations_to_orders": {
+        "id": "organizations_to_orders",
+        "identification": false,
+        "relationshipType": 4,
+        "startRelationshipType": 1,
+        "start": {
+          "tableId": "organizations",
+          "columnIds": [
+            "organizations._id"
+          ],
+          "x": 470,
+          "y": 620,
+          "direction": 8
+        },
+        "end": {
+          "tableId": "orders",
+          "columnIds": [
+            "orders.organization_id"
+          ],
+          "x": 800,
+          "y": 3200,
+          "direction": 4
+        },
+        "meta": {
+          "updateAt": 0,
+          "createAt": 0
+        }
+      },
+      "users_to_orders": {
+        "id": "users_to_orders",
+        "identification": false,
+        "relationshipType": 4,
+        "startRelationshipType": 1,
+        "start": {
+          "tableId": "users",
+          "columnIds": [
+            "users._id"
+          ],
+          "x": 1400,
+          "y": 650,
+          "direction": 8
+        },
+        "end": {
+          "tableId": "orders",
+          "columnIds": [
+            "orders.user_id"
+          ],
+          "x": 1070,
+          "y": 3200,
+          "direction": 4
+        },
+        "meta": {
+          "updateAt": 0,
+          "createAt": 0
+        }
+      },
+      "orders_to_payment_transactions": {
+        "id": "orders_to_payment_transactions",
+        "identification": false,
+        "relationshipType": 4,
+        "startRelationshipType": 1,
+        "start": {
+          "tableId": "orders",
+          "columnIds": [
+            "orders._id"
+          ],
+          "x": 1410,
+          "y": 3360,
+          "direction": 2
+        },
+        "end": {
+          "tableId": "payment_transactions",
+          "columnIds": [
+            "payment_transactions.order_id"
+          ],
+          "x": 1660,
+          "y": 3360,
+          "direction": 1
+        },
+        "meta": {
+          "updateAt": 0,
+          "createAt": 0
+        }
+      },
+      "organizations_to_payment_transactions": {
+        "id": "organizations_to_payment_transactions",
+        "identification": false,
+        "relationshipType": 4,
+        "startRelationshipType": 1,
+        "start": {
+          "tableId": "organizations",
+          "columnIds": [
+            "organizations._id"
+          ],
+          "x": 480,
+          "y": 630,
+          "direction": 8
+        },
+        "end": {
+          "tableId": "payment_transactions",
+          "columnIds": [
+            "payment_transactions.organization_id"
+          ],
+          "x": 1800,
+          "y": 3200,
+          "direction": 4
+        },
+        "meta": {
+          "updateAt": 0,
+          "createAt": 0
+        }
+      },
+      "organizations_to_shipments": {
+        "id": "organizations_to_shipments",
+        "identification": false,
+        "relationshipType": 4,
+        "startRelationshipType": 1,
+        "start": {
+          "tableId": "organizations",
+          "columnIds": [
+            "organizations._id"
+          ],
+          "x": 480,
+          "y": 650,
+          "direction": 8
+        },
+        "end": {
+          "tableId": "shipments",
+          "columnIds": [
+            "shipments.organization_id"
+          ],
+          "x": 790,
+          "y": 4250,
+          "direction": 4
+        },
+        "meta": {
+          "updateAt": 0,
+          "createAt": 0
+        }
+      },
+      "orders_to_shipments": {
+        "id": "orders_to_shipments",
+        "identification": false,
+        "relationshipType": 4,
+        "startRelationshipType": 1,
+        "start": {
+          "tableId": "orders",
+          "columnIds": [
+            "orders._id"
+          ],
+          "x": 1010,
+          "y": 3900,
+          "direction": 8
+        },
+        "end": {
+          "tableId": "shipments",
+          "columnIds": [
+            "shipments.order_id"
+          ],
+          "x": 1010,
+          "y": 4250,
+          "direction": 4
+        },
+        "meta": {
+          "updateAt": 0,
+          "createAt": 0
+        }
+      },
+      "users_to_shipments": {
+        "id": "users_to_shipments",
+        "identification": false,
+        "relationshipType": 4,
+        "startRelationshipType": 1,
+        "start": {
+          "tableId": "users",
+          "columnIds": [
+            "users._id"
+          ],
+          "x": 1510,
+          "y": 650,
+          "direction": 8
+        },
+        "end": {
+          "tableId": "shipments",
+          "columnIds": [
+            "shipments.managed_by_user_id"
+          ],
+          "x": 790,
+          "y": 4250,
+          "direction": 4
+        },
+        "meta": {
+          "updateAt": 0,
+          "createAt": 0
+        }
+      },
+      "shipments_to_shipment_events": {
+        "id": "shipments_to_shipment_events",
+        "identification": false,
+        "relationshipType": 4,
+        "startRelationshipType": 1,
+        "start": {
+          "tableId": "shipments",
+          "columnIds": [
+            "shipments._id"
+          ],
+          "x": 1430,
+          "y": 4480,
+          "direction": 2
+        },
+        "end": {
+          "tableId": "shipment_events",
+          "columnIds": [
+            "shipment_events.shipment_id"
+          ],
+          "x": 1660,
+          "y": 4480,
+          "direction": 1
+        },
+        "meta": {
+          "updateAt": 0,
+          "createAt": 0
+        }
+      },
+      "organizations_to_shipment_events": {
+        "id": "organizations_to_shipment_events",
+        "identification": false,
+        "relationshipType": 4,
+        "startRelationshipType": 1,
+        "start": {
+          "tableId": "organizations",
+          "columnIds": [
+            "organizations._id"
+          ],
+          "x": 480,
+          "y": 650,
+          "direction": 8
+        },
+        "end": {
+          "tableId": "shipment_events",
+          "columnIds": [
+            "shipment_events.organization_id"
+          ],
+          "x": 1800,
+          "y": 4250,
+          "direction": 4
+        },
+        "meta": {
+          "updateAt": 0,
+          "createAt": 0
+        }
+      },
+      "users_to_shipment_events": {
+        "id": "users_to_shipment_events",
+        "identification": false,
+        "relationshipType": 4,
+        "startRelationshipType": 1,
+        "start": {
+          "tableId": "users",
+          "columnIds": [
+            "users._id"
+          ],
+          "x": 1510,
+          "y": 650,
+          "direction": 8
+        },
+        "end": {
+          "tableId": "shipment_events",
+          "columnIds": [
+            "shipment_events.recorded_by_user_id"
+          ],
+          "x": 1800,
+          "y": 4250,
+          "direction": 4
+        },
+        "meta": {
+          "updateAt": 0,
+          "createAt": 0
+        }
+      }
+    },
+    "indexEntities": {
+      "organization_role.unique_organization_user_role": {
+        "id": "organization_role.unique_organization_user_role",
+        "name": "unique_organization_user_role",
+        "tableId": "organization_role",
+        "indexColumnIds": [
+          "organization_role.unique_organization_user_role.organization_id",
+          "organization_role.unique_organization_user_role.user_id",
+          "organization_role.unique_organization_user_role.role"
+        ],
+        "seqIndexColumnIds": [
+          "organization_role.unique_organization_user_role.organization_id",
+          "organization_role.unique_organization_user_role.user_id",
+          "organization_role.unique_organization_user_role.role"
+        ],
+        "unique": true,
+        "meta": {
+          "updateAt": 0,
+          "createAt": 0
+        }
+      },
+      "organization_role.user_organizations": {
+        "id": "organization_role.user_organizations",
+        "name": "user_organizations",
+        "tableId": "organization_role",
+        "indexColumnIds": [
+          "organization_role.user_organizations.user_id",
+          "organization_role.user_organizations.organization_id"
+        ],
+        "seqIndexColumnIds": [
+          "organization_role.user_organizations.user_id",
+          "organization_role.user_organizations.organization_id"
+        ],
+        "unique": false,
+        "meta": {
+          "updateAt": 0,
+          "createAt": 0
+        }
+      },
+      "wholesale_buyer_profiles.unique_organization_buyer": {
+        "id": "wholesale_buyer_profiles.unique_organization_buyer",
+        "name": "unique_organization_buyer",
+        "tableId": "wholesale_buyer_profiles",
+        "indexColumnIds": [
+          "wholesale_buyer_profiles.unique_organization_buyer.organization_id",
+          "wholesale_buyer_profiles.unique_organization_buyer.user_id"
+        ],
+        "seqIndexColumnIds": [
+          "wholesale_buyer_profiles.unique_organization_buyer.organization_id",
+          "wholesale_buyer_profiles.unique_organization_buyer.user_id"
+        ],
+        "unique": true,
+        "meta": {
+          "updateAt": 0,
+          "createAt": 0
+        }
+      },
+      "wholesale_buyer_profiles.buyer_organizations": {
+        "id": "wholesale_buyer_profiles.buyer_organizations",
+        "name": "buyer_organizations",
+        "tableId": "wholesale_buyer_profiles",
+        "indexColumnIds": [
+          "wholesale_buyer_profiles.buyer_organizations.user_id",
+          "wholesale_buyer_profiles.buyer_organizations.organization_id"
+        ],
+        "seqIndexColumnIds": [
+          "wholesale_buyer_profiles.buyer_organizations.user_id",
+          "wholesale_buyer_profiles.buyer_organizations.organization_id"
+        ],
+        "unique": false,
+        "meta": {
+          "updateAt": 0,
+          "createAt": 0
+        }
+      },
+      "products.organization_status": {
+        "id": "products.organization_status",
+        "name": "organization_status",
+        "tableId": "products",
+        "indexColumnIds": [
+          "products.organization_status.organization_id",
+          "products.organization_status.status"
+        ],
+        "seqIndexColumnIds": [
+          "products.organization_status.organization_id",
+          "products.organization_status.status"
+        ],
+        "unique": false,
+        "meta": {
+          "updateAt": 0,
+          "createAt": 0
+        }
+      },
+      "product_variants.organization_product": {
+        "id": "product_variants.organization_product",
+        "name": "organization_product",
+        "tableId": "product_variants",
+        "indexColumnIds": [
+          "product_variants.organization_product.organization_id",
+          "product_variants.organization_product.product_id"
+        ],
+        "seqIndexColumnIds": [
+          "product_variants.organization_product.organization_id",
+          "product_variants.organization_product.product_id"
+        ],
+        "unique": false,
+        "meta": {
+          "updateAt": 0,
+          "createAt": 0
+        }
+      },
+      "carts.unique_shop_user_mode": {
+        "id": "carts.unique_shop_user_mode",
+        "name": "unique_shop_user_mode",
+        "tableId": "carts",
+        "indexColumnIds": [
+          "carts.unique_shop_user_mode.organization_id",
+          "carts.unique_shop_user_mode.user_id",
+          "carts.unique_shop_user_mode.shopping_as"
+        ],
+        "seqIndexColumnIds": [
+          "carts.unique_shop_user_mode.organization_id",
+          "carts.unique_shop_user_mode.user_id",
+          "carts.unique_shop_user_mode.shopping_as"
+        ],
+        "unique": true,
+        "meta": {
+          "updateAt": 0,
+          "createAt": 0
+        }
+      },
+      "orders.unique_shop_order_number": {
+        "id": "orders.unique_shop_order_number",
+        "name": "unique_shop_order_number",
+        "tableId": "orders",
+        "indexColumnIds": [
+          "orders.unique_shop_order_number.organization_id",
+          "orders.unique_shop_order_number.order_number"
+        ],
+        "seqIndexColumnIds": [
+          "orders.unique_shop_order_number.organization_id",
+          "orders.unique_shop_order_number.order_number"
+        ],
+        "unique": true,
+        "meta": {
+          "updateAt": 0,
+          "createAt": 0
+        }
+      },
+      "orders.buyer_history": {
+        "id": "orders.buyer_history",
+        "name": "buyer_history",
+        "tableId": "orders",
+        "indexColumnIds": [
+          "orders.buyer_history.user_id",
+          "orders.buyer_history.placed_at"
+        ],
+        "seqIndexColumnIds": [
+          "orders.buyer_history.user_id",
+          "orders.buyer_history.placed_at"
+        ],
+        "unique": false,
+        "meta": {
+          "updateAt": 0,
+          "createAt": 0
+        }
+      },
+      "orders.shop_history": {
+        "id": "orders.shop_history",
+        "name": "shop_history",
+        "tableId": "orders",
+        "indexColumnIds": [
+          "orders.shop_history.organization_id",
+          "orders.shop_history.placed_at"
+        ],
+        "seqIndexColumnIds": [
+          "orders.shop_history.organization_id",
+          "orders.shop_history.placed_at"
+        ],
+        "unique": false,
+        "meta": {
+          "updateAt": 0,
+          "createAt": 0
+        }
+      },
+      "payment_transactions.unique_shop_provider_event": {
+        "id": "payment_transactions.unique_shop_provider_event",
+        "name": "unique_shop_provider_event",
+        "tableId": "payment_transactions",
+        "indexColumnIds": [
+          "payment_transactions.unique_shop_provider_event.organization_id",
+          "payment_transactions.unique_shop_provider_event.provider",
+          "payment_transactions.unique_shop_provider_event.event_key"
+        ],
+        "seqIndexColumnIds": [
+          "payment_transactions.unique_shop_provider_event.organization_id",
+          "payment_transactions.unique_shop_provider_event.provider",
+          "payment_transactions.unique_shop_provider_event.event_key"
+        ],
+        "unique": true,
+        "meta": {
+          "updateAt": 0,
+          "createAt": 0
+        }
+      },
+      "payment_transactions.order_history": {
+        "id": "payment_transactions.order_history",
+        "name": "order_history",
+        "tableId": "payment_transactions",
+        "indexColumnIds": [
+          "payment_transactions.order_history.organization_id",
+          "payment_transactions.order_history.order_id",
+          "payment_transactions.order_history.occurred_at"
+        ],
+        "seqIndexColumnIds": [
+          "payment_transactions.order_history.organization_id",
+          "payment_transactions.order_history.order_id",
+          "payment_transactions.order_history.occurred_at"
+        ],
+        "unique": false,
+        "meta": {
+          "updateAt": 0,
+          "createAt": 0
+        }
+      },
+      "payment_transactions.provider_payment_lookup": {
+        "id": "payment_transactions.provider_payment_lookup",
+        "name": "provider_payment_lookup",
+        "tableId": "payment_transactions",
+        "indexColumnIds": [
+          "payment_transactions.provider_payment_lookup.organization_id",
+          "payment_transactions.provider_payment_lookup.provider",
+          "payment_transactions.provider_payment_lookup.provider_payment_id"
+        ],
+        "seqIndexColumnIds": [
+          "payment_transactions.provider_payment_lookup.organization_id",
+          "payment_transactions.provider_payment_lookup.provider",
+          "payment_transactions.provider_payment_lookup.provider_payment_id"
+        ],
+        "unique": false,
+        "meta": {
+          "updateAt": 0,
+          "createAt": 0
+        }
+      },
+      "shipments.order_shipments": {
+        "id": "shipments.order_shipments",
+        "name": "order_shipments",
+        "tableId": "shipments",
+        "indexColumnIds": [
+          "shipments.order_shipments.organization_id",
+          "shipments.order_shipments.order_id",
+          "shipments.order_shipments.created_at"
+        ],
+        "seqIndexColumnIds": [
+          "shipments.order_shipments.organization_id",
+          "shipments.order_shipments.order_id",
+          "shipments.order_shipments.created_at"
+        ],
+        "unique": false,
+        "meta": {
+          "updateAt": 0,
+          "createAt": 0
+        }
+      },
+      "shipments.manager_queue": {
+        "id": "shipments.manager_queue",
+        "name": "manager_queue",
+        "tableId": "shipments",
+        "indexColumnIds": [
+          "shipments.manager_queue.organization_id",
+          "shipments.manager_queue.managed_by_user_id",
+          "shipments.manager_queue.status"
+        ],
+        "seqIndexColumnIds": [
+          "shipments.manager_queue.organization_id",
+          "shipments.manager_queue.managed_by_user_id",
+          "shipments.manager_queue.status"
+        ],
+        "unique": false,
+        "meta": {
+          "updateAt": 0,
+          "createAt": 0
+        }
+      },
+      "shipments.provider_tracking_lookup": {
+        "id": "shipments.provider_tracking_lookup",
+        "name": "provider_tracking_lookup",
+        "tableId": "shipments",
+        "indexColumnIds": [
+          "shipments.provider_tracking_lookup.organization_id",
+          "shipments.provider_tracking_lookup.shipping_provider",
+          "shipments.provider_tracking_lookup.tracking_number"
+        ],
+        "seqIndexColumnIds": [
+          "shipments.provider_tracking_lookup.organization_id",
+          "shipments.provider_tracking_lookup.shipping_provider",
+          "shipments.provider_tracking_lookup.tracking_number"
+        ],
+        "unique": false,
+        "meta": {
+          "updateAt": 0,
+          "createAt": 0
+        }
+      },
+      "shipment_events.unique_shipment_event": {
+        "id": "shipment_events.unique_shipment_event",
+        "name": "unique_shipment_event",
+        "tableId": "shipment_events",
+        "indexColumnIds": [
+          "shipment_events.unique_shipment_event.organization_id",
+          "shipment_events.unique_shipment_event.shipment_id",
+          "shipment_events.unique_shipment_event.event_key"
+        ],
+        "seqIndexColumnIds": [
+          "shipment_events.unique_shipment_event.organization_id",
+          "shipment_events.unique_shipment_event.shipment_id",
+          "shipment_events.unique_shipment_event.event_key"
+        ],
+        "unique": true,
+        "meta": {
+          "updateAt": 0,
+          "createAt": 0
+        }
+      },
+      "shipment_events.shipment_timeline": {
+        "id": "shipment_events.shipment_timeline",
+        "name": "shipment_timeline",
+        "tableId": "shipment_events",
+        "indexColumnIds": [
+          "shipment_events.shipment_timeline.organization_id",
+          "shipment_events.shipment_timeline.shipment_id",
+          "shipment_events.shipment_timeline.occurred_at"
+        ],
+        "seqIndexColumnIds": [
+          "shipment_events.shipment_timeline.organization_id",
+          "shipment_events.shipment_timeline.shipment_id",
+          "shipment_events.shipment_timeline.occurred_at"
+        ],
+        "unique": false,
+        "meta": {
+          "updateAt": 0,
+          "createAt": 0
+        }
+      }
+    },
+    "indexColumnEntities": {
+      "organization_role.unique_organization_user_role.organization_id": {
+        "id": "organization_role.unique_organization_user_role.organization_id",
+        "indexId": "organization_role.unique_organization_user_role",
+        "columnId": "organization_role.organization_id",
+        "orderType": 1,
+        "meta": {
+          "updateAt": 0,
+          "createAt": 0
+        }
+      },
+      "organization_role.unique_organization_user_role.user_id": {
+        "id": "organization_role.unique_organization_user_role.user_id",
+        "indexId": "organization_role.unique_organization_user_role",
+        "columnId": "organization_role.user_id",
+        "orderType": 1,
+        "meta": {
+          "updateAt": 0,
+          "createAt": 0
+        }
+      },
+      "organization_role.unique_organization_user_role.role": {
+        "id": "organization_role.unique_organization_user_role.role",
+        "indexId": "organization_role.unique_organization_user_role",
+        "columnId": "organization_role.role",
+        "orderType": 1,
+        "meta": {
+          "updateAt": 0,
+          "createAt": 0
+        }
+      },
+      "organization_role.user_organizations.user_id": {
+        "id": "organization_role.user_organizations.user_id",
+        "indexId": "organization_role.user_organizations",
+        "columnId": "organization_role.user_id",
+        "orderType": 1,
+        "meta": {
+          "updateAt": 0,
+          "createAt": 0
+        }
+      },
+      "organization_role.user_organizations.organization_id": {
+        "id": "organization_role.user_organizations.organization_id",
+        "indexId": "organization_role.user_organizations",
+        "columnId": "organization_role.organization_id",
+        "orderType": 1,
+        "meta": {
+          "updateAt": 0,
+          "createAt": 0
+        }
+      },
+      "wholesale_buyer_profiles.unique_organization_buyer.organization_id": {
+        "id": "wholesale_buyer_profiles.unique_organization_buyer.organization_id",
+        "indexId": "wholesale_buyer_profiles.unique_organization_buyer",
+        "columnId": "wholesale_buyer_profiles.organization_id",
+        "orderType": 1,
+        "meta": {
+          "updateAt": 0,
+          "createAt": 0
+        }
+      },
+      "wholesale_buyer_profiles.unique_organization_buyer.user_id": {
+        "id": "wholesale_buyer_profiles.unique_organization_buyer.user_id",
+        "indexId": "wholesale_buyer_profiles.unique_organization_buyer",
+        "columnId": "wholesale_buyer_profiles.user_id",
+        "orderType": 1,
+        "meta": {
+          "updateAt": 0,
+          "createAt": 0
+        }
+      },
+      "wholesale_buyer_profiles.buyer_organizations.user_id": {
+        "id": "wholesale_buyer_profiles.buyer_organizations.user_id",
+        "indexId": "wholesale_buyer_profiles.buyer_organizations",
+        "columnId": "wholesale_buyer_profiles.user_id",
+        "orderType": 1,
+        "meta": {
+          "updateAt": 0,
+          "createAt": 0
+        }
+      },
+      "wholesale_buyer_profiles.buyer_organizations.organization_id": {
+        "id": "wholesale_buyer_profiles.buyer_organizations.organization_id",
+        "indexId": "wholesale_buyer_profiles.buyer_organizations",
+        "columnId": "wholesale_buyer_profiles.organization_id",
+        "orderType": 1,
+        "meta": {
+          "updateAt": 0,
+          "createAt": 0
+        }
+      },
+      "products.organization_status.organization_id": {
+        "id": "products.organization_status.organization_id",
+        "indexId": "products.organization_status",
+        "columnId": "products.organization_id",
+        "orderType": 1,
+        "meta": {
+          "updateAt": 0,
+          "createAt": 0
+        }
+      },
+      "products.organization_status.status": {
+        "id": "products.organization_status.status",
+        "indexId": "products.organization_status",
+        "columnId": "products.status",
+        "orderType": 1,
+        "meta": {
+          "updateAt": 0,
+          "createAt": 0
+        }
+      },
+      "product_variants.organization_product.organization_id": {
+        "id": "product_variants.organization_product.organization_id",
+        "indexId": "product_variants.organization_product",
+        "columnId": "product_variants.organization_id",
+        "orderType": 1,
+        "meta": {
+          "updateAt": 0,
+          "createAt": 0
+        }
+      },
+      "product_variants.organization_product.product_id": {
+        "id": "product_variants.organization_product.product_id",
+        "indexId": "product_variants.organization_product",
+        "columnId": "product_variants.product_id",
+        "orderType": 1,
+        "meta": {
+          "updateAt": 0,
+          "createAt": 0
+        }
+      },
+      "carts.unique_shop_user_mode.organization_id": {
+        "id": "carts.unique_shop_user_mode.organization_id",
+        "indexId": "carts.unique_shop_user_mode",
+        "columnId": "carts.organization_id",
+        "orderType": 1,
+        "meta": {
+          "updateAt": 0,
+          "createAt": 0
+        }
+      },
+      "carts.unique_shop_user_mode.user_id": {
+        "id": "carts.unique_shop_user_mode.user_id",
+        "indexId": "carts.unique_shop_user_mode",
+        "columnId": "carts.user_id",
+        "orderType": 1,
+        "meta": {
+          "updateAt": 0,
+          "createAt": 0
+        }
+      },
+      "carts.unique_shop_user_mode.shopping_as": {
+        "id": "carts.unique_shop_user_mode.shopping_as",
+        "indexId": "carts.unique_shop_user_mode",
+        "columnId": "carts.shopping_as",
+        "orderType": 1,
+        "meta": {
+          "updateAt": 0,
+          "createAt": 0
+        }
+      },
+      "orders.unique_shop_order_number.organization_id": {
+        "id": "orders.unique_shop_order_number.organization_id",
+        "indexId": "orders.unique_shop_order_number",
+        "columnId": "orders.organization_id",
+        "orderType": 1,
+        "meta": {
+          "updateAt": 0,
+          "createAt": 0
+        }
+      },
+      "orders.unique_shop_order_number.order_number": {
+        "id": "orders.unique_shop_order_number.order_number",
+        "indexId": "orders.unique_shop_order_number",
+        "columnId": "orders.order_number",
+        "orderType": 1,
+        "meta": {
+          "updateAt": 0,
+          "createAt": 0
+        }
+      },
+      "orders.buyer_history.user_id": {
+        "id": "orders.buyer_history.user_id",
+        "indexId": "orders.buyer_history",
+        "columnId": "orders.user_id",
+        "orderType": 1,
+        "meta": {
+          "updateAt": 0,
+          "createAt": 0
+        }
+      },
+      "orders.buyer_history.placed_at": {
+        "id": "orders.buyer_history.placed_at",
+        "indexId": "orders.buyer_history",
+        "columnId": "orders.placed_at",
+        "orderType": 1,
+        "meta": {
+          "updateAt": 0,
+          "createAt": 0
+        }
+      },
+      "orders.shop_history.organization_id": {
+        "id": "orders.shop_history.organization_id",
+        "indexId": "orders.shop_history",
+        "columnId": "orders.organization_id",
+        "orderType": 1,
+        "meta": {
+          "updateAt": 0,
+          "createAt": 0
+        }
+      },
+      "orders.shop_history.placed_at": {
+        "id": "orders.shop_history.placed_at",
+        "indexId": "orders.shop_history",
+        "columnId": "orders.placed_at",
+        "orderType": 1,
+        "meta": {
+          "updateAt": 0,
+          "createAt": 0
+        }
+      },
+      "payment_transactions.unique_shop_provider_event.organization_id": {
+        "id": "payment_transactions.unique_shop_provider_event.organization_id",
+        "indexId": "payment_transactions.unique_shop_provider_event",
+        "columnId": "payment_transactions.organization_id",
+        "orderType": 1,
+        "meta": {
+          "updateAt": 0,
+          "createAt": 0
+        }
+      },
+      "payment_transactions.unique_shop_provider_event.provider": {
+        "id": "payment_transactions.unique_shop_provider_event.provider",
+        "indexId": "payment_transactions.unique_shop_provider_event",
+        "columnId": "payment_transactions.provider",
+        "orderType": 1,
+        "meta": {
+          "updateAt": 0,
+          "createAt": 0
+        }
+      },
+      "payment_transactions.unique_shop_provider_event.event_key": {
+        "id": "payment_transactions.unique_shop_provider_event.event_key",
+        "indexId": "payment_transactions.unique_shop_provider_event",
+        "columnId": "payment_transactions.event_key",
+        "orderType": 1,
+        "meta": {
+          "updateAt": 0,
+          "createAt": 0
+        }
+      },
+      "payment_transactions.order_history.organization_id": {
+        "id": "payment_transactions.order_history.organization_id",
+        "indexId": "payment_transactions.order_history",
+        "columnId": "payment_transactions.organization_id",
+        "orderType": 1,
+        "meta": {
+          "updateAt": 0,
+          "createAt": 0
+        }
+      },
+      "payment_transactions.order_history.order_id": {
+        "id": "payment_transactions.order_history.order_id",
+        "indexId": "payment_transactions.order_history",
+        "columnId": "payment_transactions.order_id",
+        "orderType": 1,
+        "meta": {
+          "updateAt": 0,
+          "createAt": 0
+        }
+      },
+      "payment_transactions.order_history.occurred_at": {
+        "id": "payment_transactions.order_history.occurred_at",
+        "indexId": "payment_transactions.order_history",
+        "columnId": "payment_transactions.occurred_at",
+        "orderType": 1,
+        "meta": {
+          "updateAt": 0,
+          "createAt": 0
+        }
+      },
+      "payment_transactions.provider_payment_lookup.organization_id": {
+        "id": "payment_transactions.provider_payment_lookup.organization_id",
+        "indexId": "payment_transactions.provider_payment_lookup",
+        "columnId": "payment_transactions.organization_id",
+        "orderType": 1,
+        "meta": {
+          "updateAt": 0,
+          "createAt": 0
+        }
+      },
+      "payment_transactions.provider_payment_lookup.provider": {
+        "id": "payment_transactions.provider_payment_lookup.provider",
+        "indexId": "payment_transactions.provider_payment_lookup",
+        "columnId": "payment_transactions.provider",
+        "orderType": 1,
+        "meta": {
+          "updateAt": 0,
+          "createAt": 0
+        }
+      },
+      "payment_transactions.provider_payment_lookup.provider_payment_id": {
+        "id": "payment_transactions.provider_payment_lookup.provider_payment_id",
+        "indexId": "payment_transactions.provider_payment_lookup",
+        "columnId": "payment_transactions.provider_payment_id",
+        "orderType": 1,
+        "meta": {
+          "updateAt": 0,
+          "createAt": 0
+        }
+      },
+      "shipments.order_shipments.organization_id": {
+        "id": "shipments.order_shipments.organization_id",
+        "indexId": "shipments.order_shipments",
+        "columnId": "shipments.organization_id",
+        "orderType": 1,
+        "meta": {
+          "updateAt": 0,
+          "createAt": 0
+        }
+      },
+      "shipments.order_shipments.order_id": {
+        "id": "shipments.order_shipments.order_id",
+        "indexId": "shipments.order_shipments",
+        "columnId": "shipments.order_id",
+        "orderType": 1,
+        "meta": {
+          "updateAt": 0,
+          "createAt": 0
+        }
+      },
+      "shipments.order_shipments.created_at": {
+        "id": "shipments.order_shipments.created_at",
+        "indexId": "shipments.order_shipments",
+        "columnId": "shipments.created_at",
+        "orderType": 1,
+        "meta": {
+          "updateAt": 0,
+          "createAt": 0
+        }
+      },
+      "shipments.manager_queue.organization_id": {
+        "id": "shipments.manager_queue.organization_id",
+        "indexId": "shipments.manager_queue",
+        "columnId": "shipments.organization_id",
+        "orderType": 1,
+        "meta": {
+          "updateAt": 0,
+          "createAt": 0
+        }
+      },
+      "shipments.manager_queue.managed_by_user_id": {
+        "id": "shipments.manager_queue.managed_by_user_id",
+        "indexId": "shipments.manager_queue",
+        "columnId": "shipments.managed_by_user_id",
+        "orderType": 1,
+        "meta": {
+          "updateAt": 0,
+          "createAt": 0
+        }
+      },
+      "shipments.manager_queue.status": {
+        "id": "shipments.manager_queue.status",
+        "indexId": "shipments.manager_queue",
+        "columnId": "shipments.status",
+        "orderType": 1,
+        "meta": {
+          "updateAt": 0,
+          "createAt": 0
+        }
+      },
+      "shipments.provider_tracking_lookup.organization_id": {
+        "id": "shipments.provider_tracking_lookup.organization_id",
+        "indexId": "shipments.provider_tracking_lookup",
+        "columnId": "shipments.organization_id",
+        "orderType": 1,
+        "meta": {
+          "updateAt": 0,
+          "createAt": 0
+        }
+      },
+      "shipments.provider_tracking_lookup.shipping_provider": {
+        "id": "shipments.provider_tracking_lookup.shipping_provider",
+        "indexId": "shipments.provider_tracking_lookup",
+        "columnId": "shipments.shipping_provider",
+        "orderType": 1,
+        "meta": {
+          "updateAt": 0,
+          "createAt": 0
+        }
+      },
+      "shipments.provider_tracking_lookup.tracking_number": {
+        "id": "shipments.provider_tracking_lookup.tracking_number",
+        "indexId": "shipments.provider_tracking_lookup",
+        "columnId": "shipments.tracking_number",
+        "orderType": 1,
+        "meta": {
+          "updateAt": 0,
+          "createAt": 0
+        }
+      },
+      "shipment_events.unique_shipment_event.organization_id": {
+        "id": "shipment_events.unique_shipment_event.organization_id",
+        "indexId": "shipment_events.unique_shipment_event",
+        "columnId": "shipment_events.organization_id",
+        "orderType": 1,
+        "meta": {
+          "updateAt": 0,
+          "createAt": 0
+        }
+      },
+      "shipment_events.unique_shipment_event.shipment_id": {
+        "id": "shipment_events.unique_shipment_event.shipment_id",
+        "indexId": "shipment_events.unique_shipment_event",
+        "columnId": "shipment_events.shipment_id",
+        "orderType": 1,
+        "meta": {
+          "updateAt": 0,
+          "createAt": 0
+        }
+      },
+      "shipment_events.unique_shipment_event.event_key": {
+        "id": "shipment_events.unique_shipment_event.event_key",
+        "indexId": "shipment_events.unique_shipment_event",
+        "columnId": "shipment_events.event_key",
+        "orderType": 1,
+        "meta": {
+          "updateAt": 0,
+          "createAt": 0
+        }
+      },
+      "shipment_events.shipment_timeline.organization_id": {
+        "id": "shipment_events.shipment_timeline.organization_id",
+        "indexId": "shipment_events.shipment_timeline",
+        "columnId": "shipment_events.organization_id",
+        "orderType": 1,
+        "meta": {
+          "updateAt": 0,
+          "createAt": 0
+        }
+      },
+      "shipment_events.shipment_timeline.shipment_id": {
+        "id": "shipment_events.shipment_timeline.shipment_id",
+        "indexId": "shipment_events.shipment_timeline",
+        "columnId": "shipment_events.shipment_id",
+        "orderType": 1,
+        "meta": {
+          "updateAt": 0,
+          "createAt": 0
+        }
+      },
+      "shipment_events.shipment_timeline.occurred_at": {
+        "id": "shipment_events.shipment_timeline.occurred_at",
+        "indexId": "shipment_events.shipment_timeline",
+        "columnId": "shipment_events.occurred_at",
+        "orderType": 1,
+        "meta": {
+          "updateAt": 0,
+          "createAt": 0
+        }
+      }
+    },
+    "memoEntities": {}
+  }
+}
