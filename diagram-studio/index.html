@@ -3,8 +3,21 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="theme-color" content="#f7f8f5" />
-    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='15' fill='%230e3e49'/%3E%3Cpath d='M20 32l12-12 12 12-12 12z' fill='none' stroke='%237ee0cf' stroke-width='5'/%3E%3C/svg%3E" />
+    <script>
+      try {
+        document.documentElement.classList.toggle(
+          "dark",
+          localStorage.getItem("arm-farms-theme") !== "light",
+        );
+      } catch {
+        document.documentElement.classList.add("dark");
+      }
+    </script>
+    <meta name="theme-color" content="#0c1410" />
+    <link
+      rel="icon"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='15' fill='%230e3e49'/%3E%3Cpath d='M20 32l12-12 12 12-12 12z' fill='none' stroke='%237ee0cf' stroke-width='5'/%3E%3C/svg%3E"
+    />
     <title>ARM Farms · Diagram Studio</title>
   </head>
   <body>

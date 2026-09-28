@@ -1,19 +1,32 @@
-import { forwardRef, useEffect, useImperativeHandle, useState } from 'react';
-import { Excalidraw } from '@excalidraw/excalidraw';
+import { forwardRef, useEffect, useImperativeHandle, useState } from "react";
+import { Excalidraw } from "@excalidraw/excalidraw";
 
-const DrawingCanvas = forwardRef(function DrawingCanvas({ scene, name }, ref) {
+const DrawingCanvas = forwardRef(function DrawingCanvas(
+  { scene, name, theme },
+  ref,
+) {
   const [api, setApi] = useState(null);
 
-  useImperativeHandle(ref, () => ({
-    fit() {
-      api?.scrollToContent(scene.elements, { fitToViewport: true, viewportZoomFactor: 1 });
-    },
-  }), [api, scene]);
+  useImperativeHandle(
+    ref,
+    () => ({
+      fit() {
+        api?.scrollToContent(scene.elements, {
+          fitToViewport: true,
+          viewportZoomFactor: 1,
+        });
+      },
+    }),
+    [api, scene],
+  );
 
   useEffect(() => {
     if (!api || !scene.elements.length) return;
     const frame = requestAnimationFrame(() => {
-      api.scrollToContent(scene.elements, { fitToViewport: true, viewportZoomFactor: 1 });
+      api.scrollToContent(scene.elements, {
+        fitToViewport: true,
+        viewportZoomFactor: 1,
+      });
     });
     return () => cancelAnimationFrame(frame);
   }, [api, scene]);
@@ -25,7 +38,7 @@ const DrawingCanvas = forwardRef(function DrawingCanvas({ scene, name }, ref) {
       viewModeEnabled
       zenModeEnabled
       gridModeEnabled={false}
-      theme="light"
+      theme={theme}
       name={name}
       UIOptions={{
         canvasActions: {

@@ -2,7 +2,7 @@
 
 A read-only React/Vite viewer for the ERD JSON snapshots and Excalidraw drawing in the parent directory. The source files remain the source of truth; this application imports them at build time and Vite reloads them during development.
 
-The interface uses Tailwind CSS 4 and local shadcn/ui components with a custom ARM Farms theme. Theme tokens are in `src/index.css`; application layout styles are in `src/styles.css`.
+The interface uses Tailwind CSS 4 utilities and local shadcn/ui components. `src/index.css` contains only Tailwind imports and the light/dark theme tokens. The theme toggle remembers your choice in local storage; dark mode is the default.
 
 ## Run
 
