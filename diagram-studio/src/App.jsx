@@ -1,11 +1,17 @@
 import { lazy, memo, Suspense, useEffect, useMemo, useRef, useState } from 'react';
 import {
   Activity, ArrowDownToLine, ArrowRight, ArrowUpRight, Boxes, Check,
-  ChevronDown, Database, FileJson2, Focus, GitBranch, Globe2,
+  Database, FileJson2, Focus, GitBranch, Globe2,
   KeyRound, Layers3, LayoutDashboard, Network, Route, Search,
   ShieldCheck, Sparkles, Truck, Users, X, Zap,
 } from 'lucide-react';
 import { Background, BackgroundVariant, Controls, Handle, MarkerType, Position, ReactFlow } from '@xyflow/react';
+import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent } from '@/components/ui/card';
+import { Input } from '@/components/ui/input';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { domains, downloadText, drawingSource, getScene, readSchema, roles, schemaSources } from './data.js';
 import { downloadSchemaPng } from './schemaExport.js';
 
@@ -40,9 +46,9 @@ function Sidebar({ page, onPage }) {
       <div className="sidebar-section-title">WORKSPACE</div>
       <nav className="sidebar-nav" aria-label="Main navigation">
         {navItems.map(({ id, label, icon: Icon }) => (
-          <button key={id} className={`nav-item ${page === id ? 'active' : ''}`} onClick={() => onPage(id)}>
+          <Button key={id} variant="ghost" className={`nav-item ${page === id ? 'active' : ''}`} onClick={() => onPage(id)}>
             <Icon size={18} strokeWidth={1.8} /><span>{label}</span>{page === id && <span className="nav-active-dot" />}
-          </button>
+          </Button>
         ))}
       </nav>
 
@@ -63,21 +69,21 @@ function Header({ page, onExport, busy }) {
   return (
     <header className="page-header">
       <div className="header-copy"><div className="eyebrow"><span className="eyebrow-line" />{meta.eyebrow}</div><h1>{meta.title}</h1><p>{meta.description}</p></div>
-      <div className="header-actions"><span className="live-chip"><span />SOURCE FILES CONNECTED</span>{page !== 'overview' && <button className="button button-dark" onClick={onExport} disabled={busy}><ArrowDownToLine size={17} />{busy ? 'Exporting…' : 'Export 3× PNG'}</button>}</div>
+      <div className="header-actions"><Badge variant="outline" className="live-chip"><span />SOURCE FILES CONNECTED</Badge>{page !== 'overview' && <Button className="button button-dark" onClick={onExport} disabled={busy}><ArrowDownToLine size={17} />{busy ? 'Exporting…' : 'Export 3× PNG'}</Button>}</div>
     </header>
   );
 }
 
 function MetricCard({ icon: Icon, value, label, note, tone }) {
-  return <div className={`metric-card metric-${tone}`}><div className="metric-top"><span className="metric-icon"><Icon size={20} strokeWidth={1.8} /></span><ArrowUpRight size={18} className="metric-arrow" /></div><div className="metric-value">{value}</div><div className="metric-label">{label}</div><div className="metric-note">{note}</div></div>;
+  return <Card className={`metric-card metric-${tone}`}><CardContent className="metric-content"><div className="metric-top"><span className="metric-icon"><Icon size={20} strokeWidth={1.8} /></span><ArrowUpRight size={18} className="metric-arrow" /></div><div className="metric-value">{value}</div><div className="metric-label">{label}</div><div className="metric-note">{note}</div></CardContent></Card>;
 }
 
 function Overview({ onPage, model }) {
   const { tables, relationships, indexes } = model;
   return <div className="overview-content">
     <div className="hero-panel">
-      <div className="hero-text"><span className="hero-tag"><span /> ARCHITECTURE WORKSPACE</span><h2>See the whole story<br /><em>behind the storefront.</em></h2><p>From MongoDB collections to the journeys people take, every diagram is together in one clean, explorable place.</p><button className="button button-light" onClick={() => onPage('model')}>Explore the model <ArrowRight size={18} /></button></div>
-      <div className="hero-graphic" aria-hidden="true"><div className="hero-ring ring-one" /><div className="hero-ring ring-two" /><div className="hero-ring ring-three" /><div className="hero-center"><Layers3 size={34} /></div><div className="hero-orbit orbit-a"><Database size={21} /></div><div className="hero-orbit orbit-b"><Globe2 size={21} /></div><div className="hero-orbit orbit-c"><Route size={21} /></div><div className="hero-orbit orbit-d"><Zap size={21} /></div></div>
+      <div className="hero-text"><span className="hero-tag"><span /> THE SYSTEM, MAPPED</span><h2>Everything behind<br /><em>the storefront.</em></h2><p>Browse the MongoDB model, follow each user journey, and see how the platform fits together.</p><Button className="button button-light" onClick={() => onPage('model')}>Explore the model <ArrowRight size={17} /></Button></div>
+      <div className="hero-graphic" aria-hidden="true"><div className="hero-map-label">PLATFORM MAP</div><div className="hero-map-row"><span>Storefront</span><i /><span>Commerce API</span><i /><span>MongoDB</span></div><div className="hero-map-lower"><i /><span>Redis cache</span></div></div>
     </div>
     <div className="section-heading"><div><div className="section-kicker">PROJECT SNAPSHOT</div><h3>Everything in one view</h3></div><span>Current ERD · {schemaSources[0].file}</span></div>
     <div className="metrics-grid"><MetricCard icon={Boxes} value={tables.length} label="Collections" note="Across four business domains" tone="teal" /><MetricCard icon={GitBranch} value={relationships.length} label="Relationships" note="Mapped from the ERD source" tone="violet" /><MetricCard icon={Users} value="04" label="User journeys" note="From signup to fulfillment" tone="orange" /><MetricCard icon={Layers3} value={schemaSources.length} label="Schema versions" note={`${indexes} modeled indexes in current`} tone="blue" /></div>
@@ -126,7 +132,7 @@ function Inspector({ table, relationships, onClose }) {
   if (!table) return <aside className="inspector inspector-empty"><div className="inspector-placeholder"><Focus size={26} /><h3>Select a collection</h3><p>Click a collection in the diagram to inspect its fields and connections.</p></div></aside>;
   const domain = domains.find((item) => item.id === table.domain);
   const related = relationships.filter((rel) => rel.start?.tableId === table.id || rel.end?.tableId === table.id);
-  return <aside className="inspector"><div className="inspector-top"><span className="inspector-kicker">COLLECTION DETAILS</span><button className="icon-button close-inspector" onClick={onClose} aria-label="Close details"><X size={17} /></button></div><div className="inspector-title"><div className="inspector-symbol" style={{ color: domain.color, backgroundColor: `${domain.color}18` }}>{(() => { const Icon = iconForDomain(table.domain); return <Icon size={25} />; })()}</div><h3>{table.name}</h3><p>{table.comment || 'MongoDB collection'}</p><span className="inspector-domain" style={{ color: domain.color, backgroundColor: `${domain.color}15` }}>{domain.label}</span></div><div className="inspector-stat-row"><span><strong>{table.fields.length}</strong> fields</span><span><strong>{related.length}</strong> links</span></div><div className="inspector-section"><h4>FIELDS <span>{table.fields.length}</span></h4><div className="inspector-fields">{table.fields.map((field) => <div className="inspector-field" key={field.id}><div><span>{field.name === '_id' ? <KeyRound size={14} /> : <span className="field-small-dot" />}</span><strong>{field.name}</strong></div><small>{field.dataType || '—'}</small>{field.comment && <p>{field.comment}</p>}</div>)}</div></div><div className="inspector-section inspector-links"><h4>RELATIONSHIPS <span>{related.length}</span></h4>{related.map((rel) => <div className="related-row" key={rel.id}><GitBranch size={15} />{rel.start.tableId === table.id ? rel.end.tableId : rel.start.tableId}</div>)}</div></aside>;
+  return <aside className="inspector"><div className="inspector-top"><span className="inspector-kicker">COLLECTION DETAILS</span><Button variant="ghost" size="icon-xs" className="icon-button close-inspector" onClick={onClose} aria-label="Close details"><X size={16} /></Button></div><div className="inspector-title"><div className="inspector-symbol" style={{ color: domain.color, backgroundColor: `${domain.color}18` }}>{(() => { const Icon = iconForDomain(table.domain); return <Icon size={23} />; })()}</div><h3>{table.name}</h3><p>{table.comment || 'MongoDB collection'}</p><Badge variant="secondary" className="inspector-domain">{domain.label}</Badge></div><div className="inspector-stat-row"><span><strong>{table.fields.length}</strong> fields</span><span><strong>{related.length}</strong> links</span></div><div className="inspector-section"><h4>FIELDS <span>{table.fields.length}</span></h4><div className="inspector-fields">{table.fields.map((field) => <div className="inspector-field" key={field.id}><div><span>{field.name === '_id' ? <KeyRound size={14} /> : <span className="field-small-dot" />}</span><strong>{field.name}</strong></div><small>{field.dataType || '—'}</small>{field.comment && <p>{field.comment}</p>}</div>)}</div></div><div className="inspector-section inspector-links"><h4>RELATIONSHIPS <span>{related.length}</span></h4>{related.map((rel) => <div className="related-row" key={rel.id}><GitBranch size={15} />{rel.start.tableId === table.id ? rel.end.tableId : rel.start.tableId}</div>)}</div></aside>;
 }
 
 function DataModel({ source, setSource, domain, setDomain, search, setSearch, selectedId, setSelectedId, stageRef }) {
@@ -134,10 +140,10 @@ function DataModel({ source, setSource, domain, setDomain, search, setSearch, se
   const graph = useMemo(() => createGraph(model, domain, search), [model, domain, search]);
   const selected = model.tables.find((table) => table.id === selectedId) || null;
   const visibleSelected = selected && graph.tables.some((table) => table.id === selected.id) ? selected : null;
-  return <div className="diagram-page model-page"><div className="diagram-toolbar"><div className="toolbar-group"><span className="toolbar-label">SCHEMA VERSION</span><div className="select-wrap"><FileJson2 size={16} /><select value={source.id} onChange={(event) => { setSource(schemaSources.find((item) => item.id === event.target.value)); setSelectedId(null); }}>{schemaSources.map((item) => <option value={item.id} key={item.id}>{item.label} · {item.file}</option>)}</select><ChevronDown size={16} /></div></div><div className="toolbar-search"><Search size={17} /><input value={search} onChange={(event) => setSearch(event.target.value)} placeholder="Search collections or fields" aria-label="Search collections or fields" />{search && <button onClick={() => setSearch('')} aria-label="Clear search"><X size={15} /></button>}</div></div>
-    <div className="domain-tabs" role="tablist" aria-label="Schema domain">{domains.map((item) => <button role="tab" aria-selected={domain === item.id} className={domain === item.id ? 'active' : ''} key={item.id} onClick={() => { setDomain(item.id); setSelectedId(null); }}><span className="domain-indicator" style={{ backgroundColor: item.color }} />{item.label}<span className="domain-count">{item.id === 'all' ? model.tables.length : model.tables.filter((table) => table.domain === item.id).length}</span></button>)}</div>
+  return <div className="diagram-page model-page"><div className="diagram-toolbar"><div className="toolbar-group"><span className="toolbar-label">SCHEMA VERSION</span><Select value={source.id} onValueChange={(id) => { setSource(schemaSources.find((item) => item.id === id)); setSelectedId(null); }}><SelectTrigger className="select-wrap"><FileJson2 size={15} /><SelectValue /></SelectTrigger><SelectContent>{schemaSources.map((item) => <SelectItem value={item.id} key={item.id}>{item.label} · {item.file}</SelectItem>)}</SelectContent></Select></div><div className="toolbar-search"><Search size={16} /><Input className="toolbar-search-input" value={search} onChange={(event) => setSearch(event.target.value)} placeholder="Search collections or fields" aria-label="Search collections or fields" />{search && <Button variant="ghost" size="icon-xs" onClick={() => setSearch('')} aria-label="Clear search"><X size={14} /></Button>}</div></div>
+    <Tabs value={domain} onValueChange={(id) => { setDomain(id); setSelectedId(null); }} className="domain-tabs"><TabsList variant="line" className="domain-tabs-list">{domains.map((item) => <TabsTrigger value={item.id} className="domain-tab" key={item.id}><span className="domain-indicator" style={{ backgroundColor: item.color }} />{item.label}<span className="domain-count">{item.id === 'all' ? model.tables.length : model.tables.filter((table) => table.domain === item.id).length}</span></TabsTrigger>)}</TabsList></Tabs>
     <div className="model-workspace"><div className="diagram-stage model-stage" ref={stageRef}>{graph.nodes.length ? <ReactFlow key={`${source.id}-${domain}-${search}`} nodes={graph.nodes.map((node) => ({ ...node, selected: node.id === selectedId }))} edges={graph.edges} nodeTypes={nodeTypes} onNodeClick={(_, node) => setSelectedId(node.id)} onPaneClick={() => setSelectedId(null)} fitView fitViewOptions={{ padding: 0.18, maxZoom: 1.05 }} minZoom={0.18} maxZoom={1.8} nodesDraggable={false} nodesConnectable={false} proOptions={{ hideAttribution: true }}><Background variant={BackgroundVariant.Dots} gap={22} size={1.25} color="#dce8e6" /><Controls position="bottom-left" showInteractive={false} /></ReactFlow> : <div className="empty-search"><Search size={28} /><strong>No matching collections</strong><span>Try another name or field.</span></div>}<span className="stage-hint">SCROLL TO ZOOM · DRAG TO PAN · CLICK A COLLECTION</span></div><Inspector table={visibleSelected} relationships={model.relationships} onClose={() => setSelectedId(null)} /></div>
-    <div className="diagram-footer"><span><span className="footer-dot" /> Loaded from <strong>{source.file}</strong></span><button onClick={() => downloadText(source.file, source.raw)}><ArrowDownToLine size={15} /> Download source JSON</button></div>
+    <div className="diagram-footer"><span><span className="footer-dot" /> Loaded from <strong>{source.file}</strong></span><Button variant="ghost" size="sm" onClick={() => downloadText(source.file, source.raw)}><ArrowDownToLine size={14} /> Download source JSON</Button></div>
   </div>;
 }
 
@@ -146,10 +152,10 @@ function DrawingPage({ page, role, setRole, drawingRef, stageRef }) {
   const scene = useMemo(() => getScene(section, role), [section, role]);
   const focused = page === 'journeys' ? roles.find((item) => item.id === role) : null;
   return <div className="diagram-page drawing-page">
-    {page === 'journeys' ? <div className="drawing-toolbar"><div><span className="toolbar-label">FOCUS A JOURNEY</span><div className="role-tabs">{roles.map((item) => <button key={item.id} className={role === item.id ? 'active' : ''} onClick={() => setRole(item.id)}>{item.label}</button>)}</div></div><div className="drawing-toolbar-note"><span className="mini-status-dot" /> Read-only Excalidraw preview</div></div> : <div className="architecture-intro"><div className="architecture-intro-icon"><Network size={22} /></div><div><strong>A shared commerce platform for independent shops</strong><span>Public assets at the edge. Short-lived catalog caching. MongoDB remains the source of truth.</span></div><span className="architecture-pill">PROPOSED DESIGN</span></div>}
-    <div className="diagram-stage drawing-stage" ref={stageRef}><button className="fit-button" onClick={() => drawingRef.current?.fit()}><Focus size={16} /> Fit drawing</button><Suspense fallback={<div className="canvas-loading"><span className="loader-ring" /> Loading drawing…</div>}><DrawingCanvas key={`${section}-${role}`} ref={drawingRef} scene={scene} name={page === 'architecture' ? 'ARM Farms Architecture' : `ARM Farms ${focused?.label || 'Role Journeys'}`} /></Suspense></div>
+    {page === 'journeys' ? <div className="drawing-toolbar"><div><span className="toolbar-label">FOCUS A JOURNEY</span><Tabs value={role} onValueChange={setRole} className="role-tabs"><TabsList variant="line" className="role-tabs-list">{roles.map((item) => <TabsTrigger value={item.id} key={item.id} className="role-tab">{item.label}</TabsTrigger>)}</TabsList></Tabs></div><div className="drawing-toolbar-note"><span className="mini-status-dot" /> Read-only Excalidraw preview</div></div> : <div className="architecture-intro"><div className="architecture-intro-icon"><Network size={20} /></div><div><strong>A shared commerce platform for independent shops</strong><span>Public assets at the edge. Short-lived catalog caching. MongoDB remains the source of truth.</span></div><Badge variant="outline" className="architecture-pill">PROPOSED DESIGN</Badge></div>}
+    <div className="diagram-stage drawing-stage" ref={stageRef}><Button variant="outline" size="sm" className="fit-button" onClick={() => drawingRef.current?.fit()}><Focus size={15} /> Fit drawing</Button><Suspense fallback={<div className="canvas-loading"><span className="loader-ring" /> Loading drawing…</div>}><DrawingCanvas key={`${section}-${role}`} ref={drawingRef} scene={scene} name={page === 'architecture' ? 'ARM Farms Architecture' : `ARM Farms ${focused?.label || 'Role Journeys'}`} /></Suspense></div>
     {page === 'architecture' && <div className="benefit-row"><div><span className="benefit-icon cdn"><Globe2 size={18} /></span><strong>CDN</strong><p>Delivers public images and static assets closer to shoppers.</p></div><div><span className="benefit-icon redis"><Zap size={18} /></span><strong>Redis</strong><p>Speeds up repeated catalog reads and lowers database load.</p></div><div><span className="benefit-icon mongo"><ShieldCheck size={18} /></span><strong>MongoDB</strong><p>Stores the authoritative shop, customer, stock, and order data.</p></div></div>}
-    <div className="diagram-footer"><span><span className="footer-dot" /> Loaded from <strong>{drawingSource.file}</strong></span><button onClick={() => downloadText(drawingSource.file, drawingSource.raw)}><ArrowDownToLine size={15} /> Download Excalidraw source</button></div>
+    <div className="diagram-footer"><span><span className="footer-dot" /> Loaded from <strong>{drawingSource.file}</strong></span><Button variant="ghost" size="sm" onClick={() => downloadText(drawingSource.file, drawingSource.raw)}><ArrowDownToLine size={14} /> Download Excalidraw source</Button></div>
   </div>;
 }
 
@@ -159,7 +165,7 @@ export default function App() {
     return pageMeta[initial] ? initial : 'overview';
   });
   const [source, setSource] = useState(schemaSources[0]);
-  const [domain, setDomain] = useState('all');
+  const [domain, setDomain] = useState('identity');
   const [search, setSearch] = useState('');
   const [selectedId, setSelectedId] = useState('organizations');
   const [role, setRole] = useState('all');
@@ -208,5 +214,5 @@ export default function App() {
     }
   }
 
-  return <div className="app-shell"><Sidebar page={page} onPage={setPage} /><main className="main-panel"><Header page={page} onExport={exportPng} busy={busy} /><div className="page-body">{page === 'overview' && <Overview onPage={setPage} model={model} />}{page === 'model' && <DataModel source={source} setSource={setSource} domain={domain} setDomain={setDomain} search={search} setSearch={setSearch} selectedId={selectedId} setSelectedId={setSelectedId} stageRef={stageRef} />}{(page === 'journeys' || page === 'architecture') && <DrawingPage page={page} role={role} setRole={setRole} drawingRef={drawingRef} stageRef={stageRef} />}</div></main>{toast && <div className="toast"><Check size={17} />{toast}</div>}</div>;
+  return <div className="app-shell flex min-h-screen bg-background text-foreground"><Sidebar page={page} onPage={setPage} /><main className="main-panel min-w-0 flex-1"><Header page={page} onExport={exportPng} busy={busy} /><div className="page-body">{page === 'overview' && <Overview onPage={setPage} model={model} />}{page === 'model' && <DataModel source={source} setSource={setSource} domain={domain} setDomain={setDomain} search={search} setSearch={setSearch} selectedId={selectedId} setSelectedId={setSelectedId} stageRef={stageRef} />}{(page === 'journeys' || page === 'architecture') && <DrawingPage page={page} role={role} setRole={setRole} drawingRef={drawingRef} stageRef={stageRef} />}</div></main>{toast && <div className="toast"><Check size={17} />{toast}</div>}</div>;
 }

@@ -16,11 +16,11 @@ export const drawingSource = {
 };
 
 export const domains = [
-  { id: 'all', label: 'All collections', color: '#325e74' },
-  { id: 'identity', label: 'Identity & shops', color: '#127b79' },
-  { id: 'catalog', label: 'Catalog & pricing', color: '#7755a5' },
-  { id: 'commerce', label: 'Cart & orders', color: '#d27d3f' },
-  { id: 'fulfillment', label: 'Fulfillment', color: '#2f75a1' },
+  { id: 'all', label: 'All collections', color: '#496857' },
+  { id: 'identity', label: 'Identity & shops', color: '#37634a' },
+  { id: 'catalog', label: 'Catalog & pricing', color: '#756b87' },
+  { id: 'commerce', label: 'Cart & orders', color: '#9b795c' },
+  { id: 'fulfillment', label: 'Fulfillment', color: '#638080' },
 ];
 
 const domainByTable = {
