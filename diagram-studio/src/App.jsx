@@ -24,6 +24,8 @@ import {
   LayoutDashboard,
   Moon,
   Network,
+  PanelLeftClose,
+  PanelLeftOpen,
   Route,
   Search,
   ShieldCheck,
@@ -130,14 +132,17 @@ function iconForDomain(id) {
   );
 }
 
-function Sidebar({ page, onPage }) {
+function Sidebar({ page, onPage, onClose }) {
   return (
-    <aside className="sticky top-0 z-20 flex h-screen w-[68px] shrink-0 flex-col border-r border-border bg-card px-2 py-6 md:w-[244px] md:px-4 md:py-8">
-      <div className="mb-10 flex items-center gap-3 px-2 md:px-3">
+    <aside
+      id="studio-sidebar"
+      className="fixed inset-y-0 left-0 z-40 flex h-screen w-[244px] shrink-0 flex-col border-r border-border bg-card px-4 py-8 shadow-2xl md:sticky md:top-0 md:z-20 md:shadow-none"
+    >
+      <div className="mb-10 flex items-center gap-3 px-3">
         <span className="grid size-9 shrink-0 place-items-center rounded-xl bg-primary text-primary-foreground">
           <span className="size-3.5 rotate-45 rounded-[2px] border-2 border-current" />
         </span>
-        <span className="hidden min-w-0 md:block">
+        <span className="min-w-0 flex-1">
           <strong className="block text-xs font-bold tracking-[0.12em]">
             ARM FARMS
           </strong>
@@ -145,11 +150,18 @@ function Sidebar({ page, onPage }) {
             SYSTEMS STUDIO
           </small>
         </span>
+        <Button
+          variant="ghost"
+          size="icon-xs"
+          className="md:hidden"
+          onClick={onClose}
+          aria-label="Close sidebar"
+        >
+          <X className="size-4" />
+        </Button>
       </div>
 
-      <span className={`${kickerClass} mb-3 hidden px-3 md:block`}>
-        Workspace
-      </span>
+      <span className={`${kickerClass} mb-3 px-3`}>Workspace</span>
       <nav className="grid gap-1" aria-label="Main navigation">
         {navItems.map(({ id, label, icon: Icon }) => (
           <Button
@@ -157,21 +169,19 @@ function Sidebar({ page, onPage }) {
             variant="ghost"
             aria-label={label}
             aria-current={page === id ? "page" : undefined}
-            className={`h-11 w-full justify-center gap-3 px-0 text-muted-foreground md:justify-start md:px-3 ${page === id ? "bg-secondary font-semibold text-secondary-foreground hover:bg-secondary" : "hover:bg-muted hover:text-foreground"}`}
+            className={`h-11 w-full justify-start gap-3 px-3 text-muted-foreground ${page === id ? "bg-secondary font-semibold text-secondary-foreground hover:bg-secondary" : "hover:bg-muted hover:text-foreground"}`}
             onClick={() => onPage(id)}
           >
             <Icon className="size-[18px] shrink-0" strokeWidth={1.8} />
-            <span className="hidden flex-1 text-left text-[13px] md:inline">
-              {label}
-            </span>
+            <span className="flex-1 text-left text-[13px]">{label}</span>
             {page === id && (
-              <span className="hidden size-1.5 rounded-full bg-primary md:inline-block" />
+              <span className="size-1.5 rounded-full bg-primary" />
             )}
           </Button>
         ))}
       </nav>
 
-      <div className="mt-auto hidden md:block">
+      <div className="mt-auto">
         <div className="rounded-xl border border-border bg-muted/50 p-4">
           <Sparkles className="mb-3 size-5 text-primary" />
           <strong className="block text-xs font-semibold">
@@ -198,21 +208,47 @@ function Sidebar({ page, onPage }) {
   );
 }
 
-function Header({ page, onExport, busy, theme, onToggleTheme }) {
+function Header({
+  page,
+  onExport,
+  busy,
+  theme,
+  onToggleTheme,
+  sidebarOpen,
+  onToggleSidebar,
+}) {
   const meta = pageMeta[page];
   return (
     <header className="flex min-h-[152px] flex-wrap items-center justify-between gap-5 border-b border-border bg-card/70 px-5 py-7 sm:px-8 lg:px-12">
-      <div className="min-w-0">
-        <div className="mb-3 flex items-center gap-2 text-[10px] font-bold tracking-[0.15em] text-primary/70 dark:text-primary/80">
-          <span className="h-px w-4 bg-current" />
-          {meta.eyebrow}
+      <div className="flex min-w-0 flex-1 items-start gap-3">
+        <Button
+          variant="outline"
+          size="icon"
+          className="mt-0.5 shrink-0"
+          onClick={onToggleSidebar}
+          aria-label={sidebarOpen ? "Close sidebar" : "Open sidebar"}
+          aria-expanded={sidebarOpen}
+          aria-controls={sidebarOpen ? "studio-sidebar" : undefined}
+          title={sidebarOpen ? "Close sidebar" : "Open sidebar"}
+        >
+          {sidebarOpen ? (
+            <PanelLeftClose className="size-4" />
+          ) : (
+            <PanelLeftOpen className="size-4" />
+          )}
+        </Button>
+        <div className="min-w-0">
+          <div className="mb-3 flex items-center gap-2 text-[10px] font-bold tracking-[0.15em] text-primary/70 dark:text-primary/80">
+            <span className="h-px w-4 bg-current" />
+            {meta.eyebrow}
+          </div>
+          <h1 className="text-[clamp(1.55rem,2.7vw,2.15rem)] font-semibold leading-tight tracking-[-0.045em]">
+            {meta.title}
+          </h1>
+          <p className="mt-2 max-w-2xl text-xs leading-relaxed text-muted-foreground sm:text-[13px]">
+            {meta.description}
+          </p>
         </div>
-        <h1 className="text-[clamp(1.55rem,2.7vw,2.15rem)] font-semibold leading-tight tracking-[-0.045em]">
-          {meta.title}
-        </h1>
-        <p className="mt-2 max-w-2xl text-xs leading-relaxed text-muted-foreground sm:text-[13px]">
-          {meta.description}
-        </p>
       </div>
       <div className="flex shrink-0 items-center gap-2 sm:gap-3">
         <Badge
@@ -985,6 +1021,9 @@ export default function App() {
     const initial = window.location.hash.replace("#", "");
     return pageMeta[initial] ? initial : "overview";
   });
+  const [sidebarOpen, setSidebarOpen] = useState(
+    () => window.matchMedia("(min-width: 768px)").matches,
+  );
   const [theme, setTheme] = useState(() => {
     try {
       return window.localStorage.getItem("arm-farms-theme") === "light"
@@ -1028,6 +1067,36 @@ export default function App() {
     window.addEventListener("hashchange", onHashChange);
     return () => window.removeEventListener("hashchange", onHashChange);
   }, []);
+  useEffect(() => {
+    if (!sidebarOpen) return;
+    const mobileView = window.matchMedia("(max-width: 767px)");
+    const previousOverflow = document.body.style.overflow;
+    const syncOverflow = () => {
+      document.body.style.overflow = mobileView.matches
+        ? "hidden"
+        : previousOverflow;
+    };
+    syncOverflow();
+    const onKeyDown = (event) => {
+      if (event.key === "Escape" && mobileView.matches) {
+        setSidebarOpen(false);
+      }
+    };
+    mobileView.addEventListener("change", syncOverflow);
+    window.addEventListener("keydown", onKeyDown);
+    return () => {
+      document.body.style.overflow = previousOverflow;
+      mobileView.removeEventListener("change", syncOverflow);
+      window.removeEventListener("keydown", onKeyDown);
+    };
+  }, [sidebarOpen]);
+
+  function navigateFromSidebar(nextPage) {
+    setPage(nextPage);
+    if (!window.matchMedia("(min-width: 768px)").matches) {
+      setSidebarOpen(false);
+    }
+  }
 
   async function exportPng() {
     if (!stageRef.current || busy) return;
@@ -1076,7 +1145,21 @@ export default function App() {
 
   return (
     <div className="flex min-h-screen w-full bg-background text-foreground">
-      <Sidebar page={page} onPage={setPage} />
+      {sidebarOpen && (
+        <>
+          <button
+            type="button"
+            className="fixed inset-0 z-30 bg-black/50 md:hidden"
+            onClick={() => setSidebarOpen(false)}
+            aria-label="Close sidebar overlay"
+          />
+          <Sidebar
+            page={page}
+            onPage={navigateFromSidebar}
+            onClose={() => setSidebarOpen(false)}
+          />
+        </>
+      )}
       <main className="min-w-0 flex-1">
         <Header
           page={page}
@@ -1086,6 +1169,8 @@ export default function App() {
           onToggleTheme={() =>
             setTheme((current) => (current === "dark" ? "light" : "dark"))
           }
+          sidebarOpen={sidebarOpen}
+          onToggleSidebar={() => setSidebarOpen((current) => !current)}
         />
         <div className="mx-auto max-w-[1670px] px-4 py-6 sm:px-8 lg:px-12 lg:py-8">
           {page === "overview" && <Overview onPage={setPage} model={model} />}
